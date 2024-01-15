@@ -1,0 +1,118 @@
+{
+  "people": [
+    {
+      "name": "John",
+      "surname": "Smith",
+      "sex": "male",
+      "age": 26,
+      "photo": "https://m.media-amazon.com/images/M/MV5BMjM3MjM3NTAxM15BMl5BanBnXkFtZTgwMTY0Nzg2OTE@._V1_.jpg"
+    },
+    {
+      "name": "Angela",
+      "surname": "Whinston",
+      "sex": "female",
+      "age": 31,
+      "photo": "https://onthewingsoflove.blob.core.windows.net/album/011816-Angela/1.jpg"
+    },
+    {
+      "name": "Alex",
+      "surname": "Solberry",
+      "sex": "male",
+      "age": 35,
+      "photo": "https://www.gv.com/img/team-large/john-lyman.jpg"
+    },
+    {
+      "name": "Anna",
+      "surname": "Rayan",
+      "sex": "female",
+      "age": 23,
+      "photo": "https://pbs.twimg.com/profile_images/1127551365918679040/On8uLuSc.jpg"
+    },
+    {
+      "name": "Michael",
+      "surname": "Dobkin",
+      "sex": "male",
+      "age": 30,
+      "photo": "https://wwwimage-secure.cbsstatic.com/thumbnails/photos/w425/cast/3b2b388f58aae2da_yr_michaelm_800x1000.jpg"
+    }
+  ],
+  "users": [
+    {
+      "name": "Irina",
+      "surname": "Hmeleva",
+      "sex": "female",
+      "age": "48",
+      "id": "1984"
+    },
+    {
+      "name": "Gabriala",
+      "surname": "Don",
+      "sex": "female",
+      "age": "23",
+      "id": "1235"
+    },
+    {
+      "name": "polina",
+      "surname": "isaeva",
+      "sex": "famel",
+      "age": "16",
+      "id": "2007"
+    },
+    {
+      "name": "Anton",
+      "surname": "Redline",
+      "sex": "male",
+      "age": "36",
+      "id": "1239"
+    },
+    {
+      "name": "Brenda",
+      "surname": "Wilson",
+      "sex": "female",
+      "age": 26,
+      "id": "1201"
+    }
+  ],
+  "cards": [
+    {
+      "id": "001",
+      "productName": "smartphone",
+      "productBy": "Xiaomi",
+      "productModel": "Redmi",
+      "productPrice": "8000",
+      "productColor": "black"
+    },
+    {
+      "id": "002",
+      "productName": "smartphone",
+      "productBy": "Sumsung",
+      "productModel": "Galaxy",
+      "productPrice": "12000",
+      "productColor": "red"
+    },
+    {
+      "id": "003",
+      "productName": "smartphone",
+      "productBy": "Realmi",
+      "productModel": "Horn",
+      "productPrice": "9000",
+      "productColor": "blue"
+    },
+    {
+      "id": "004",
+      "productName": "smartphone",
+      "productBy": "Meizu",
+      "productModel": "Born",
+      "productPrice": "7000",
+      "productColor": "pink"
+    },
+    {
+      "id": "005",
+      "productName": "smartphone",
+      "productBy": "Apple",
+      "productModel": "X",
+      "productPrice": "25000",
+      "productColor": "black"
+    }
+  ]
+}
