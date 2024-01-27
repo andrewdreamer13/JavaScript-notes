@@ -162,3 +162,23 @@ console.log(typeof food); // object
 //  '' ,
 //  undefined ,
 //  null
+
+
+// JS docs
+// write /** */ before the function and then click tab to open docs
+// in the first string of the docs you can write description of the function
+// in the second string you can write parameters of the function and their types and some coment
+// in the third string you can write return, type that the function will return and coment
+
+/**
+ * Function that transforms time to minutes
+ * @param {string} time string in format hh:mm
+ * @returns {number}  integer value of time in minutes
+ */
+
+function getTimeToMinute(time) {
+  let timeArr = time.split(':');
+  return +timeArr[0] * 60 + +timeArr[1];
+}
+
+console.log(getTimeToMinute('03:00')); // 180

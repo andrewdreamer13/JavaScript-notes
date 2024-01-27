@@ -251,6 +251,8 @@ function getTime2() {
 })();
 
 //  ARROW FUNCTIONS  do not have 'this', do not have 'arguments'
+// arrow function does not has a constructor
+// Arrow function does not have 'this'
 
 const arrowFunc = () => {
   return console.log('Hello,I am an arrow function!'); // explicit return

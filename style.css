@@ -1516,3 +1516,36 @@ fieldset {
   margin-bottom: 15px;
   color:#fb5d08;
 }
+
+.goods-container {
+  width: 100%;
+  padding: 20px;
+  background-color: #042048;
+  color: #fff;
+  font-size: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.goods-card {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #fff;
+}
+
+.goods-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.scalable-img {
+  display: block;
+  margin: 50px auto 50px;
+  width: 300px;
+  aspect-ratio: 1 / 1.2;
+  cursor: pointer;
+  object-fit: cover;
+  rotate: 90deg;
+}

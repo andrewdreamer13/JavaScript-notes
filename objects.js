@@ -283,7 +283,7 @@ console.log(someObject);
 
 const newSomeObject = someObject; // does not create a new object.Just new link to the origin object
 console.log(newSomeObject);
-console.log(newSomeObject === someObject);
+console.log(newSomeObject === someObject); // true
 
 newSomeObject.fuelType = 'petrol';
 
@@ -380,7 +380,7 @@ const house = {
 
 const newHouse = JSON.parse(JSON.stringify(house));
 console.log(newHouse);
-console.log(newHouse.window === house.window);
+console.log(newHouse.window === house.window); // false
 
 newHouse.window.color = 'white';
 console.log(newHouse);
@@ -620,8 +620,44 @@ getObjInfo(secondObject); // return underfind insted of error
 
 // prototype inheritance in objects
 // __proto__ - method for inheritance in objects (not in classes In classes we use 'extends' keyword)
+// __proto__ is a method of the object(instance)
+// object.__proto__ - refers to the prototype of the Object
+// object.__proto__ === Object.prototype - true
+// null and undefined do not have __proto__
+
+const object = {
+
+  water: true,
+  milk: true,
+  sugar: true,
+  coffee: true,
+  cups: true,
+}
+
+console.log(object.__proto__ === Object.prototype); // true   Object is a javascript class
+
+
+const array = [1,2,3,4];
+console.log(array.__proto__ === Array.prototype); // true   Array is a javascript class
+
+const someString = "hello";
+console.log(someString.__proto__ === String.prototype); // true   String is a javascript class
+
+function showWords() {
+  console.log('hello');
+}
+console.log(showWords.__proto__ === Function.prototype); // true    Function is a javascript class
+console.log(new showWords()); // prototype of function has a constructor
+
+
+const arrowFunction = () => {
+  console.log('hello');
+}
+console.log(arrowFunction.__proto__ === Function.prototype); // true    Function is a javascript class
+//console.log(new arrowFunction()); // arrow function does not hahe a constructor
 
 // first example with prototype inheritance (__proto__)
+
 const objA = {
   'text': 'Hello World',
   'color': 'green',
@@ -684,6 +720,69 @@ userProfile.userage = 46;
 console.log(userProfile);
 console.log(userProfile.password); // inherits from user
 
+// example with appending cards from object to the page
+
+const goodsList = {
+  products : [
+   {
+     'id': '001',
+     'title': 'goods 1',
+     'price': 100,
+     'image': 'https://picsum.photos/id/238/200/300'
+   },
+   {
+     'id': '002',
+     'title': 'goods 2',
+     'price': 200,
+     'image': 'https://picsum.photos/id/236/200/300'
+   },
+   {
+     'id': '003',
+     'title': 'goods 3',
+     'price': 300,
+     'image': 'https://picsum.photos/id/235/200/300'
+   },
+   {
+     'id': '004',
+     'title': 'goods 4',
+     'price': 300,
+     'image': 'https://picsum.photos/id/233/200/300'
+   }
+ ],
+
+ render() {
+   const goodsContainer = document.querySelector('.goods-container');
+   
+   for(let item of this.products) {
+     const card = document.createElement('div');
+     card.classList.add('goods-card');
+     card.innerHTML = `
+     <h3>${item.title}</h3>
+     <img class="goods-img" src="${item.image}" alt="${item.title}">
+       <p>${item.price} uah</p>
+       <button class="button" id="${item.id}">buy</button>
+     `;
+     goodsContainer.appendChild(card);
+   }
+ },
+
+click() {
+  const btns = document.querySelectorAll('.button');
+  btns.forEach((btn) => {
+   btn.addEventListener('click', (event) => {
+     console.log(event.target.id);
+     btn.closest('.goods-card').style.backgroundColor = 'green';
+     const newCard =  btn.closest('.goods-card').cloneNode(true);
+     document.body.append(newCard);
+   })
+  })
+}
+ 
+}
+
+goodsList.render();
+goodsList.click();
+
 
 
 // CLASSES and CONSTRUCTOR()
@@ -718,10 +817,12 @@ cars2.carGo();
 
 //  Functions - constructors for creating object templates.  Return an object
 
-function City(house,road,park) {
+class City {
+constructor(house,road,park) {
   this.house = house;
   this.road = road;
   this.park = park
+}
 }
 
 const Kharkiv = new City('stone',true,'green');

@@ -61,8 +61,9 @@ console.log(secondComent.hasOwnProperty("text")); // true
 console.log(secondComent.hasOwnProperty("votesQuantity")); // true
 
 // static method in class
-// static method can be called without creating an instance of the class
+// static method may be called without creating an instance of the class
 // static method belongs to the class and not the instance
+// static methods inherit from the class to the extended class
 
 class Car {
   static test = true; // static property
@@ -107,8 +108,37 @@ class SuperCar extends Car {
 
 console.log(SuperCar.showClassName("SuperCar")); // 'SuperCar'
 console.log(SuperCar.test); // true
+
+
+// private(hidden) properties and methods in the class are written in this way - _propertyName or _methodName 
+// but this way is just agreement between developers and not necessary in JS documentation
+// private(hidden) properties and methods in the class are written in this way - #propertyName or #methodName works on JS documentation
+
+
+class Worker {
+  #rate; // private
+  constructor(name, surname, rate, days) {
+    this.name = name;
+    this.surname = surname;
+    this.#rate = rate;
+    this.days = days;
+  }
+  getSalary() {
+    return this.#rate * this.days;
+  }
+}
+
+const worker = new Worker("Ivan", "Ivanov", 100, 25);
+console.log(worker.getSalary()); // 2500
+console.log(worker.#rate);// Error: Private field '#rate' must be declared in an enclosing class
+console.log(Worker.#rate); // Error: Private field '#rate' must be declared in an enclosing class
+
+
 // prototype inheritance in objects
 // __proto__ - method for inheritance in objects (not in classes In classes we use 'extends' keyword)
+// __proto__ is a method of the object(instance)
+// object.__proto__ - refers to the prototype of the object
+//object.__proto__ === Object.prototype - true
 
 // first example with prototype inheritance (__proto__)
 const obj1 = {
@@ -150,8 +180,10 @@ const user = {
   },
 };
 
+// filling the object's properties
 user.login = "dreamer";
 user.password = "123456789";
+
 console.log(user);
 console.log(user.passwordValidate());
 
@@ -169,6 +201,14 @@ userProfile.userage = 46;
 
 console.log(userProfile);
 console.log(userProfile.password); // inherits from user
+
+// checking property' hasOwnProperty' with cycle 'for in' 
+
+for(let prop in userProfile) {
+  if(userProfile.hasOwnProperty(prop)) {
+    console.log(prop, userProfile[prop]); // doesn't show properties from user
+  }
+}
 
 // class extending with extends and super
 
@@ -228,3 +268,293 @@ console.log(student1.passwordValidate());
 // parent's methods are accessible in the child
 console.log(student1.passwordValidate());
 console.log(student1.showValidate());
+
+// Methods getOwnPropertyDescriptor() , defineProperty() and defineProperties()
+
+const user = {
+  name: "Ivan",
+  password: "123456",
+  passwordValidate() {
+    console.log(this.password);
+  },
+}
+
+// Object's method getOwnPropertyDescriptor() - returns information about the property
+console.log(Object.getOwnPropertyDescriptor(user, 'name'));
+console.log(Object.getOwnPropertyDescriptor(user, 'passwordValidate'));
+
+// Object's method defineProperty() - defines a property's parameters in an object
+Object.defineProperty(user,'name', {
+  writable: false, // false - read-only, true - read-write
+  configurable: false, // false - non-configurable, true - configurable
+  enumerable: false, // false - non-enumerable, true - enumerable (if it is false it can't be used in 'for...in' loop)
+});
+
+//user.name = 'Andrew';
+//console.log(user); // throws an error. Property 'name' is read-only
+
+for(let prop in user) {
+  console.log(prop); // doesn't show property  name from user because it is not enumerable
+}
+
+// Object's method defineProperties() - defines parameters of several properties in an object
+
+Object.defineProperties(user, {
+  name: {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+  },
+  password: {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+  },
+})
+
+
+
+
+// inherintance in objects
+// null and undefined do not have __proto__
+
+const object = {water: true, milk: true, sugar: true, coffee: true, cups: true,}
+
+console.log(object.__proto__ === Object.prototype); // true   Object is a javascript class
+
+
+const array = [1,2,3,4];
+console.log(array.__proto__ === Array.prototype); // true   Array is a javascript class
+
+const string = "hello";
+console.log(string.__proto__ === String.prototype); // true   String is a javascript class
+
+function showWords() {
+  console.log('hello');
+}
+console.log(showWords.__proto__ === Function.prototype); // true    Function is a javascript class
+console.log(new showWords()); // prototype of function has a constructor
+
+
+const arrowFunction = () => {
+  console.log('hello');
+}
+console.log(arrowFunction.__proto__ === Function.prototype); // true    Function is a javascript class
+//console.log(new arrowFunction()); // arrow function does not hahe a constructor
+
+// coffee machine
+const coffeeMachine = {
+  'water': true,
+  'milk': true,
+  'sugar': true,
+  'coffee': true,
+  'cups': true,
+
+  makeCoffee() {
+    console.log('Please wait...');
+    if (this.water && this.milk && this.sugar && this.coffee && this.cups == true) {
+    setTimeout(() => {
+      console.log('Coffee is ready!');
+     }, 3000)
+      
+    } else {
+      setTimeout(() => {
+        console.log('Not enough ingredients!');
+       }, 3000)
+     
+    }
+  }
+}
+
+// replace some ingredients in the coffee machine
+coffeeMachine.water = false;
+
+// call the method
+coffeeMachine.makeCoffee();
+
+const coffeeMachine2 = {
+  'chocolate': true,
+  'nuts': true,
+  __proto__: coffeeMachine
+}
+
+coffeeMachine2.makeCoffee();
+
+
+// function constructor - property template for creating objects
+
+const admin = {
+  'rules': true,
+
+  isAdmin() {
+    console.log(`Admin ${this.name} has ${this.rules} rights`);
+    
+  }
+}
+
+// function constructor can contain methods and properties from another object with __proto__
+function User(name, age, gender ) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.__proto__ = admin;
+  // creating a method in the constructor
+  this.showUserData = function() {
+    console.log(`Name: ${this.name}, age: ${this.age}, gender: ${this.gender}`);
+  }
+}
+
+const user = new User('Andrew', 26, 'male');
+console.log(user);
+user1.isAdmin();
+user1.showUserData();
+
+const user2 = new User('Vlad', 27, 'male');
+console.log(user2);
+user2.isAdmin();
+user2.showUserData();
+
+
+// Classes
+
+class MotorBike {
+  constructor(brand, model, year, maxSpeed) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+    this.maxSpeed = maxSpeed;
+  }
+
+  showInfo() {
+    console.log(`Brand: ${this.brand}, model: ${this.model}, year: ${this.year}, maxSpeed: ${this.maxSpeed}`);
+  }
+}
+
+// first instance of the class MotorBike
+const bmw = new MotorBike('BMW', 'X5', 2022, 250);
+console.log(bmw);
+bmw.showInfo();
+
+// second instance of the class MotorBike
+const harley = new MotorBike('Harley', 'X5', 2022, 250);
+console.log(harley);
+harley.showInfo();
+
+// creating new class extending from the class MotorBike
+
+class SportBike extends MotorBike {
+  constructor(brand, model, year, maxSpeed, power) {
+    super(brand, model, year, maxSpeed); // calling the constructor of the parent class
+    this.power = power; // adding new property
+  }
+
+  showInfo() {
+     super.showInfo(); // calling the showInfo method of the parent class
+    console.log(`power: ${this.power}`); // adding new property
+  }
+
+}
+
+// first instance of the class SportBike
+const yamaha = new SportBike('Yamaha', 'X5', 2022, 250, 300);
+console.log(yamaha);
+yamaha.showInfo();
+
+// static methods in classes
+
+class Car {
+  static test = true; // static property
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+
+  static showClassName(name) {
+    console.log(name);
+  }
+}
+
+const audi = new Car('Audi', 'X5', 2022);
+console.log(audi);
+console.log(audi.test); // undefined because static property
+//console.log(audi.showClassName('Car')); // Error because static method
+
+console.log(Car.test); // true
+Car.showClassName('Car'); // Car
+
+
+// JS docs in classes
+// JS docs
+// write /** */ before the function and then click tab to open docs
+// in the first string of the docs you can write description of the function
+// in the second string you can write parameters of the function and their types and some coment
+// in the third string you can write return, type that the function will return and coment
+// example with complex properties and (splited) parameters in the constructor
+
+class Person {
+  /**
+   * @param {string} name - in format firstname lastname
+   * @param {string} birthday - in format dd.mm.yyyy
+   * @param {string[]} phones - array of phone numbers
+   * @param {string} address - in format city, street, house, flat
+   */
+  constructor(firstname,lastname, birthday, phones, address) {
+    // setting  simpleproperties
+    this.firstname = firstname;
+    this.lastname = lastname;
+    // setting complex properties as an object
+    let date = birthday.split('.');
+    this.date = {};
+    this.date.d = +date[0];
+    this.date.m = +date[1];
+    this.date.y = +date[2];
+    // setting complex properties as an array
+   let phoneNumbers = phones.split(',');
+    this.phones = [];
+    for (let i = 0; i < phoneNumbers.length; i++) {
+      this.phones.push(phoneNumbers[i].trim());
+    }
+    // setting complex properties as an object
+    let addressParts = address.split(', ');
+    this.address = {};
+    this.address.city = addressParts[0];
+    this.address.street = addressParts[1];
+    this.address.house = addressParts[2];
+    this.address.flat = addressParts[3];
+
+  }
+  static months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // static property belongs to the class
+
+  /**
+   * Method gets name in format lastname firstname
+   * @return {string}
+   */
+  getFullName() {
+    return `Person's full name: ${this.firstname} ${this.lastname}`
+  }
+
+  /**
+   * Method gets birthday in format dd.month.yyyy
+   * @return {string}
+   */
+  getBirthday() {
+    return `Person's birthday: ${this.date.d} ${Person.months[this.date.m - 1]} ${this.date.y}` 
+    // using static property Person.months from the class instad of months array
+    // Person.months[this.date.m - 1] - -1 because months array starts from 0
+  }
+}
+
+const user = new Person('Andrew', 'Dreamer', '01.01.1990', '+38123456789, +38987654321', 'Kharkiv, Saburovskaya, 45, 2');
+console.log(user);
+console.log(user.phones); // [+38123456789, +38987654321]
+console.log(user.address); // {city: 'Kharkiv', street: 'Saburovskaya', house: '45', flat: '2'}
+console.log(user.getFullName()); // Dreamer Andrew
+console.log(user.getBirthday()); // 01.Jan.1990
+
+
+
+
+
+
+

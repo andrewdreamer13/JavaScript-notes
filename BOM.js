@@ -106,7 +106,7 @@ window.navigator.geolocation.getCurrentPosition((pos) => {
 });
 
 
-// formData - Object
+// FormData - Object
 
 const userForm = document.querySelector('#userForm'); // gets form from DOM
 
@@ -141,4 +141,26 @@ function getUserData(e) {  // creates function for submit
 
   // getting data from userDataObject
   console.log(`My name is ${userDataObject.userName}. I am from ${userDataObject.cities}. I am ${userDataObject.userAge} old. I prefer to drink ${userDataObject.drinks}`)
+}
+
+
+// fullscreen browser API
+// can increase any DOM element size to fullscreen
+
+const img = document.createElement('img');
+img.classList.add('scalable-img');
+img.src = 'images/team-1.jpg';
+img.alt = 'team';
+document.body.appendChild(img);
+
+img.addEventListener('click', resizeImg);
+
+function resizeImg() {
+  if (!document.fullscreenElement) {
+    img.requestFullscreen();
+  }else {
+     if(document.fullscreenEnabled) {
+      document.exitFullscreen();
+     }
+  }
 }
