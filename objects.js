@@ -28,7 +28,7 @@
 
 const cities = {
   1: 'Kharkiv',
-  2: 'Kiyiv',
+  2: 'Kyiv',
   3: 'Lviv'
 }
 const listOfCities = JSON.stringify(cities); // gets a string
@@ -249,7 +249,7 @@ console.log(car);
  car.isGo(); // how to call isGo
  car.isStop();
 
-// function as a method of object whritten out of object
+// function as a method of object written out of object
 
 function carGo() {
   console.log('Go faster!!!!!')
@@ -269,10 +269,10 @@ car2.isGo(); // declaration of function carGo as a object method isGo
 
 // COPPYING OBJECTS
 
-// creting another object containing the same link
+// creating another object containing the same link
 
 const someObject = {
-  model: 'shevrolet',
+  model: 'chevrolet',
   color: 'yellow',
   width:2,
   length: 4.3,
@@ -782,6 +782,36 @@ click() {
 
 goodsList.render();
 goodsList.click();
+
+
+// getters and setters in objects
+
+const person = {
+  name: 'John',
+  age: 30,
+  address: {
+    city: 'New York',
+    country: 'USA'
+  },
+
+   get showInfo() {
+    return `${person.name} ${person.age} ${person.address.city} ${person.address.country}`
+  },
+
+  set showInfo(value) {
+    const info = value.split(' '); 
+    this.name = info[0];
+    this.age = info[1];
+    this.address.city = info[2][0];
+    this.address.country = info[3][1];
+  }
+}
+
+console.log(person.showInfo); // John 30 New York USA
+// because of getter and setter we can change the property
+const admin = person.showInfo = 'Sara 25 Dalas USA';
+console.log(admin); // Sara 25 Dalas USA
+
 
 
 

@@ -38,6 +38,19 @@ console.log(firstComent);
 console.log(firstComent instanceof Comment); // true
 console.log(firstComent instanceof Object); // true
 
+// declare a class as an expression
+// class declared as an expression can be called without creating an instance of the class in some function
+
+const CommentExpression = class {
+  constructor(text) {
+    this.text = text;
+    this.votesQuantity = 0;
+  }
+  upVote() {
+    this.votesQuantity += 1;
+  }
+};
+
 // Method hasOwnProperty() - checks if an object has a property
 
 console.log(firstComent.hasOwnProperty("text")); // true
@@ -116,7 +129,7 @@ console.log(SuperCar.test); // true
 
 
 class Worker {
-  #rate; // private
+  #rate; // private property in the class
   constructor(name, surname, rate, days) {
     this.name = name;
     this.surname = surname;
@@ -551,6 +564,62 @@ console.log(user.phones); // [+38123456789, +38987654321]
 console.log(user.address); // {city: 'Kharkiv', street: 'Saburovskaya', house: '45', flat: '2'}
 console.log(user.getFullName()); // Dreamer Andrew
 console.log(user.getBirthday()); // 01.Jan.1990
+
+
+
+// setter and getter are methods of classes and objects for working with private properties
+// property writen with get are read only
+// we use getter when we need a property that can't be changed and we want to give some logic to the property
+// we use setter when we need a property that can be changed
+// getter - binds object's property to the method. When we call property we call the method
+
+
+class Rect {
+
+  // open field can be used without constructor and without declaration in instance
+  // can be changed in instance
+  bgColor = 'red'; // public
+
+
+  constructor(width, height) {
+    this._width = width; // private
+    this.height = height;
+  }
+
+  // getter binds property to the method
+  // in console we will see 'get width' and value of this._width
+  // method that decrared with getter is named as a parameter in constructor
+
+  get width() {
+    console.log('get width');
+    return this._width
+  }
+
+  // setter binds property to the method. Setter is calling when we change the property
+  // in console we will see 'set width' and value of this._width
+  // method that decrared with setteris named as a parameter in constructor
+
+  set width(value) {
+    console.log('set width');
+    this._width = value
+  }
+
+  static getName(className) {
+   console.log(className);
+  }
+  
+}
+
+const rect = new Rect(300, 200);
+console.log(rect);
+console.log(rect.width);
+rect.width = 500; // because of setter we can change the property
+console.log(rect.width);
+console.log(rect.bgColor); // red
+rect.bgColor = 'blue'; // changing value of public property
+console.log(rect.bgColor); // blue
+Rect.getName('Rect');
+
 
 
 

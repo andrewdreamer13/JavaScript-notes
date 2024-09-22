@@ -66,14 +66,14 @@ console.log(link2.parentNode);
 
 // ELEMENTS
 
-// Property 'children'   HTML colection(pseudo-array).Has property 'length'
+// Property 'children'   HTML collection(pseudo-array).Has property 'length'
 
 const linkBox2 = document.querySelector(".link-box2");
 const link3 = document.querySelector(".link-3");
 const link4 = document.querySelector(".link-4");
 
 console.log(linkBox2.children); // shows elements inside parent
-console.log(linkBox2.children.length); // console.log length of children colection
+console.log(linkBox2.children.length); // console.log length of children collection
 
 // Properties  'firstElementChild'  'lastElementChild'
 
@@ -133,7 +133,7 @@ const selector = document.querySelector(".selector");
 console.log(selector);
 selector.innerHTML = "I am a querySelector";
 
-// Method querySelectorAll returns not alive colection
+// Method querySelectorAll returns not alive collection
 
 const items = document.querySelectorAll(".list__item");
 
@@ -221,7 +221,7 @@ document.querySelector(".content").textContent += " and Goodbye";
 
 console.log(document.querySelector(".link-box3").nextSibling.nextSibling);
 document.querySelector(".link-box3").nextSibling.nextSibling.data =
-  "New coment"; // changes coment
+  "New comment"; // changes comment
 console.log(document.querySelector(".link-box3").nextSibling.nextSibling);
 
 //   hidden  ===  display:none;

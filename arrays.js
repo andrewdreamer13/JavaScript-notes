@@ -396,6 +396,15 @@ console.log(newMoneyCount3);
 const newMoneyCount4 = moneyCount.filter((item, index) => index > 3); //works with index
 console.log(newMoneyCount4);
 
+// how to remove NaN from array fith filter
+const someAr = [1, 2, NaN, 3, 4, NaN];
+console.log(someAr);
+let filteredSomAr = someAr.filter((item) => {
+  return !Number.isNaN(item);
+} );
+console.log(filteredSomAr); // [1, 2, 3, 4]
+console.log(someAr); // [1, 2, NaN, 3, 4, NaN]
+
 //  filter() for objects in arrays
 
 const salaryInfo = [{
@@ -1077,3 +1086,14 @@ Array.prototype.devider = function (d) {
 
 console.log(numbers2.devider(2));
 console.log(bigNnumbers.devider(10));
+
+
+// prototype inheritance in arrays with __proto__
+// array2 inherits array1 and class Array with all their  properties and methods
+
+const array1 = ['eat', 'sleep', 'code'];
+const  array2 =['run', 'swim',{__proto__:array1}];
+console.log(array1); //  ['eat', 'sleep', 'code']
+console.log(array2); //  ['run', 'swim', Array]
+console.log(array2[0]); // 'run'
+console.log(array2[2][1]); // 'swim'

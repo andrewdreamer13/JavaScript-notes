@@ -102,6 +102,16 @@ if (isNaN(numStr)) {
   console.log('Number');
 }
 
+// how to remove NaN from array
+const someAr = [1, 2, NaN, 3, 4, NaN];
+console.log(someAr);
+let filteredSomAr = someAr.filter((item) => {
+  return !Number.isNaN(item);
+} );
+console.log(filteredSomAr); // [1, 2, 3, 4]
+console.log(someAr); // [1, 2, NaN, 3, 4, NaN]
+
+
 // function isFinite() - determines if a number is finite  returns true or false
 
 console.log(isFinite(100)); // true
