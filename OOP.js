@@ -20,23 +20,23 @@ class Comment {
 
 // Creating an instance of the class
 
-const firstComent = new Comment("First comment");
-console.log(firstComent);
-firstComent.upVote(); // Calling a method of the class 'Comment' in object 'firstComent'
-firstComent.upVote();
-console.log(firstComent);
-firstComent.downVote(); // Calling a method of the class 'Comment' in object 'firstComent'
-console.log(firstComent);
+const firstComment = new Comment("First comment");
+console.log(firstComment);
+firstComment.upVote(); // Calling a method of the class 'Comment' in object 'firstComment'
+firstComment.upVote();
+console.log(firstComment);
+firstComment.downVote(); // Calling a method of the class 'Comment' in object 'firstComment'
+console.log(firstComment);
 
 // prototype chaining :
 // a class inherits from another class:
-// 'firstComent' inherits from 'Comment', and 'Comment' inherits from 'Object'
+// 'firstComment' inherits from 'Comment', and 'Comment' inherits from 'Object'
 
 // operator instanceof :
 // to check if an object is an instance of a class, use the 'instanceof' operator
 
-console.log(firstComent instanceof Comment); // true
-console.log(firstComent instanceof Object); // true
+console.log(firstComment instanceof Comment); // true
+console.log(firstComment instanceof Object); // true
 
 // declare a class as an expression
 // class declared as an expression can be called without creating an instance of the class in some function
@@ -53,25 +53,25 @@ const CommentExpression = class {
 
 // Method hasOwnProperty() - checks if an object has a property
 
-console.log(firstComent.hasOwnProperty("text")); // true
+console.log(firstComment.hasOwnProperty("text")); // true
 console.log(Comment.hasOwnProperty("text")); // false
-console.log(firstComent.hasOwnProperty("votesQuantity")); // true
-console.log(firstComent.hasOwnProperty("upVote")); // false
-console.log(firstComent.hasOwnProperty("downVote")); // false
-console.log(firstComent.hasOwnProperty("hasOwnProperty")); // false
+console.log(firstComment.hasOwnProperty("votesQuantity")); // true
+console.log(firstComment.hasOwnProperty("upVote")); // false
+console.log(firstComment.hasOwnProperty("downVote")); // false
+console.log(firstComment.hasOwnProperty("hasOwnProperty")); // false
 
 // Creating another instance of the class
 
-const secondComent = new Comment("Second comment");
-console.log(secondComent);
-secondComent.upVote();
-console.log(secondComent);
+const secondComment = new Comment("Second comment");
+console.log(secondComment);
+secondComment.upVote();
+console.log(secondComment);
 
-console.log(secondComent instanceof Comment); // true
-console.log(secondComent instanceof Object); // true
+console.log(secondComment instanceof Comment); // true
+console.log(secondComment instanceof Object); // true
 
-console.log(secondComent.hasOwnProperty("text")); // true
-console.log(secondComent.hasOwnProperty("votesQuantity")); // true
+console.log(secondComment.hasOwnProperty("text")); // true
+console.log(secondComment.hasOwnProperty("votesQuantity")); // true
 
 // static method in class
 // static method may be called without creating an instance of the class
@@ -179,7 +179,7 @@ string.style.cssText = `
   `;
 document.body.append(string);
 
-// second example with prototipe (__proto__)
+// second example with prototype (__proto__)
 
 const user = {
   login: "",
@@ -353,7 +353,7 @@ const arrowFunction = () => {
   console.log('hello');
 }
 console.log(arrowFunction.__proto__ === Function.prototype); // true    Function is a javascript class
-//console.log(new arrowFunction()); // arrow function does not hahe a constructor
+//console.log(new arrowFunction()); // arrow function does not have a constructor
 
 // coffee machine
 const coffeeMachine = {

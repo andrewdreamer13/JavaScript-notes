@@ -121,7 +121,7 @@ console.log(typeof food); // object
 //  +=    increases variable value and assigns new value to this variable
 //  ==    not strict equals
 //  ===   strict equals
-//  !     not  Always true or false in resalts
+//  !     not  Always true or false in results
 //  !!    not not
 //  !=    not a strict inequality
 //  !==   a strict inequality
@@ -135,7 +135,7 @@ console.log(typeof food); // object
 //  --    decreases number by 1
 //  *     multiply
 //  **     exponentiation (2 ** 2 or 2 ** 3)
-//  /     devide
+//  /     divide
 //  %     reduce division to zero
 //  &&    and  (Always returns value from one of operands)
 //  ||    or  (Always returns value from one of operands)

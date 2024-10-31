@@ -83,7 +83,7 @@ condition();
 
   const time = 15;
 
-  let greeting = time < 12 ? 'Good mornig' : 'Good evening'
+  let greeting = time < 12 ? 'Good morning' : 'Good evening'
   console.log(greeting);
 
 

@@ -11,7 +11,7 @@ console.log(255..toString()) //    calling a method toString() on a number using
 console.log((255).toString()); // calling a method toString() on a number using rounded braces '()'
 
 
-// METHOD Math
+// Object Math
 
 const num1 = 1.5;
 

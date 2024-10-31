@@ -32,7 +32,7 @@ sayHi(); // function call
 // FUNCTION EXPRESSION
 
 // Cannot be called before it is declared..
-// Can be used to avoid issues with dinamic typing because of const
+// Can be used to avoid issues with dynamic typing because of const
 
 const sayHello = function () {
   console.log('Hello,everybody!');
@@ -49,15 +49,15 @@ multiplier(20, 5); // arguments
 
 //-----------------------------
 
-function showsum(elem, a, b) { // parameters
+function showSum(elem, a, b) { // parameters
   document.querySelector(elem).addEventListener('click', function () {
     document.querySelector(elem).textContent = a + b;
   })
 
 }
 
-showsum('.circle', 10, 30); // arguments
-showsum('.circle2', 50, 30); // arguments
+showSum('.circle', 10, 30); // arguments
+showSum('.circle2', 50, 30); // arguments
 
 
 //------------------------------------------
@@ -97,7 +97,7 @@ function arrOfArg(a, b, elem) {
 
 arrOfArg(10, 20, '.circle5');
 
-// Method rest insted of arguments. Creates an array from arguments
+// Method rest instead of arguments. Creates an array from arguments
 
 function showsum3(...args) {
   console.log(args);

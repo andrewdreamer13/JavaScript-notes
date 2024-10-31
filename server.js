@@ -1,4 +1,4 @@
-// AJAX - Asinchronous JavaScript And XML
+// AJAX - Asynchronous JavaScript And XML
 // AJAX - can get data from server without page reload
 // server for trainings -' json-server' in terminal
 
@@ -77,10 +77,10 @@
 //   };
 
 
-// example how to create dinamic cards from server data
+// example how to create dynamic cards from server data
 // method GET
 
-function wrappGetRequest() {
+function wrapGetRequest() {
 
   function req() {
 
@@ -131,10 +131,10 @@ function wrappGetRequest() {
     once: true
   });
 }
-wrappGetRequest();
+wrapGetRequest();
 
 
-function wrappPostRequest() {
+function wrapPostRequest() {
 
   function req() {
     const user = {
@@ -322,16 +322,17 @@ wrappSendFormData();
 // json() - method which works with responses from server (response.json())
 // promise
 // axios - library for requests
-// jsonplaceholder - web site with fake API for testing and prototyping.
+// json placeholder - web site with fake API for testing and prototyping.
+// https://gorest.co.in/ - web site with fake API for testing and prototyping.
 
 
 // Promise
 
-// resolve - function as parameter of object Promise.Return succesfull resalt
-// reject -  function as parameter of object Promise.Return rejected resalt
-// then() - method of object Promise for positive resalt. As  a parameter gets  response.json()  (.then(value))
-// catch() - method of object Promise for negative resalt
-// Promise.all([]) - metod of object Promise.Waits when the latest request will be done
+// resolve - function as parameter of object Promise.Return successfull result
+// reject -  function as parameter of object Promise.Return rejected result
+// then() - method of object Promise for positive result. As  a parameter gets  response.json()  (.then(value))
+// catch() - method of object Promise for negative result
+// Promise.all([]) - method of object Promise.Waits when the latest request will be done
 // Promise.race([]) - Waits when the first request will be done
 // states :
 // pending - waiting for the answer
@@ -395,9 +396,9 @@ const promise2 = new Promise(function (resolve, reject) {
     })
 });
 
-promise2.then(succesFunc, errorFunc);
+promise2.then(successFunc, errorFunc);
 
-function succesFunc(data) {
+function successFunc(data) {
   console.log(data);
   console.log('SUCCESS');
 }
@@ -506,21 +507,21 @@ fetch('http://localhost:3000/users/1201', {
   });
 
 
-// fetch('http://localhost:3000/users/4567', {
-//   method: "DELETE", 
-//   headers: {
-//     "Content-Type": "application/json"
-//   }
-// })
-// .then((response) => {                
-//   return response            
-// })
-// .then((data) => {                   
-//   console.log(data)
-// })
-// .catch((error) => {
-//   console.log(error)
-// });
+fetch('http://localhost:3000/users/4567', {
+  method: "DELETE", 
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then((response) => {                
+  return response            
+})
+.then((data) => {                   
+  console.log(data)
+})
+.catch((error) => {
+  console.log(error)
+});
 
 //-------------------
 
@@ -562,10 +563,307 @@ getData('http://localhost:3000/cards').then((cards) => {
   console.log(cards)
 });
 
-// example with method 'POST'
+// third example with Method 'GET' and displaying users's list on the screen
 
-async function sendData() {
-
+async function getUsers() {
+  const response = await fetch('https://gorest.co.in/public/v2/users');
+  return response.json();
 }
 
-sendData();
+async function showUsers () {
+ const users = await getUsers();
+ const userList = document.querySelector('.users');
+ users.forEach((user) => {
+   userList.innerHTML += `
+    <ol>
+       <li>${user.name}</li>
+       <li>${user.email}</li>
+       <li>${user.gender}</li>
+       <li>${user.status}</li>
+     </ol>
+   `
+ })
+}
+showUsers();
+
+
+// Another examples with promise, fetch, async await
+
+// promise
+// fetch
+// async await
+// rendering data from server
+
+// promise
+const newPromise = new Promise((resolve, reject) => {
+  // resolve({name: 'Andrew', age: 47});
+  reject('Something wrong');
+})
+// method 'then' has two callback functions. The first function is for resolve and the second one is for reject
+// we can write just the first function(resolve) for the negative result we use method 'catch'
+newPromise
+//.then((value) => {console.log(value)}, (error) => {console.log(error)}) // then with two functions resolve and reject
+ .then((value) => {console.log(value)}) // then with one function- resolve
+ .then(() => null, (error) => {console.log(error)}) // then with null instead function for resolve and function for reject
+ .catch((error) => {console.log(error + ' with promise')}); // catch contains reject function
+console.log(newPromise);
+
+// then chaining
+
+const promise = new Promise((resolve, reject) => {
+  resolve('Success promise');
+  reject('Rejected promise');
+})
+promise
+  .then((value) => value + ' with first then')
+  // .then((value) => {throw new Error('Error in the second then')})
+  .then((value) => value + ' with third then')
+  .then((value) => console.log(value)) //' Success promise' 'with first then' 'with second then' 'with third then'
+  .catch((error) => console.log(error)); // Error: Error in the second then
+
+
+// example with with appending tag script to the head of the document
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      let script = document.createElement('script');
+      script.src = src;
+  
+      script.onload = () => resolve(script);
+      script.onerror = () => reject(new Error(`Script loading error ${src}`));
+  
+      document.head.append(script);
+    });
+  }
+
+  // loadScript('js/audio.js');
+
+
+ // fetch() - send request to the server
+
+const getWine = fetch('https://api.sampleapis.com/wines/reds')
+.then((response) => response.json())
+.then((data) => console.log(data))
+.catch((error) => console.log(error))
+
+console.log(getWine)
+
+ // GET - get data from server
+
+const getBeer = fetch('https://api.sampleapis.com/beers/ale/18', {method: 'GET'})
+.then((response) => response.json())
+.then((data) => console.log(data))
+.catch((error) => console.log(error))
+
+console.log(getBeer)
+
+
+ // POST - send data to server
+
+ // example - 1
+ const newBeer = {
+  "price": "$15.49",
+  "name": "Sierra Nevada Pale Ale",
+  "rating": {
+  "average": 4.266364643483868,
+  "reviews": 414
+  },
+  "image": "https://www.totalwine.com/media/sys_master/twmmedia/h19/h43/11735160193054.png",
+  "id": 181
+ }
+
+ fetch('https://api.sampleapis.com/beers/ale',
+   {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"	
+    },
+      body: JSON.stringify(newBeer),
+  })
+.then((response) => response.json())
+.then((data) => console.log(data))
+.catch((error) => console.log(error))
+
+// example - 2
+fetch('https://jsonplaceholder.typicode.com/todos', {
+  method: 'POST',
+  body: JSON.stringify({
+    userId: 1,
+    title: "buy vegetables",
+    completed: true
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"	
+  }
+})
+.then(response => response.json())
+.then(json => console.log(json))
+
+
+ // PUT - full changing the existing file on server
+ 
+ fetch('https://jsonplaceholder.typicode.com/todos/5', {
+  method: 'PUT',
+  body: JSON.stringify({
+    userId: 1,
+    id: 5,
+    title: "updated resource",
+    completed: false
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"	
+  }
+})
+.then(response => response.json())
+.then(json => console.log(json))
+
+
+// PATCH - partial data change in the existing file on server
+
+fetch('https://jsonplaceholder.typicode.com/todos/2', {
+  method: 'PATCH',
+  body: JSON.stringify({
+    title: "my custom title"
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"	
+  }
+})
+.then(response => response.json())
+.then(json => console.log(json))
+
+// DELETE - deletes item from server
+
+fetch('https://jsonplaceholder.typicode.com/todos/3', {
+  method: 'DELETE'
+})
+
+const getBeer1 = fetch('./beer.json', {method: 'GET'})
+.then((response) => response.json())
+.then((data) => console.log(data))
+.catch((error) => console.log(error))
+
+console.log(getBeer1)
+
+fetch('./beer.json', {
+  method: 'PUT',
+  body: JSON.stringify({newBeer}),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"	
+  }
+})
+.then(response => response.json())
+.then(json => console.log(json))
+
+// getting data from json file in project with GET
+function getUser () {
+  fetch('http://localhost:3000/users')
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error))
+}
+getUser();
+
+// adding data to the json file in the project with POST
+const newUser1 = {
+  "name": "Debora",
+  "surname": "Smith",
+  "sex": "female",
+  "age": 45,
+ }
+
+ function addUser () {
+  fetch('http://localhost:3000/users',
+    {
+     method: "POST",
+     headers: {
+       "Content-type": "application/json; charset=UTF-8"	
+     },
+       body: JSON.stringify(newUser1),
+   })
+ }
+
+ const addBtn = document.querySelector('#people');
+
+ addBtn.addEventListener('click', addUser)
+
+
+ // removing data from the json file in the project with DELETE
+
+ function delUser () {
+  fetch('http://localhost:3000/users/1c2d', {
+    method: 'DELETE'
+  })
+ }
+
+ const removeBtn = document.querySelector('#remove');
+
+ removeBtn.addEventListener('click', delUser)
+
+ // replace data with PATCH
+
+ function replaceData () {
+  fetch('http://localhost:3000/users/921a', {
+    method: 'PATCH',
+    body: JSON.stringify({
+      "age": 18
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"	
+    }
+  })
+  .then(response => response.json())
+  .then(json => console.log(json))
+ }
+replaceData()
+ 
+
+// rendering data from json file or server
+function getUserList () {
+  const listContainer = document.querySelector('.users');
+  fetch('http://localhost:3000/users')
+  .then((response) => response.json())
+  .then((data) => data)
+  .then((data) => {
+    data.forEach((item) => {
+      listContainer.innerHTML += `
+      <ul>
+        <li>${item.name}</li>
+        <li>${item.surname}</li>
+        <li>${item.sex}</li>
+        <li>${item.age}</li>
+       </ul>
+      `
+    })
+    
+  })
+  .catch((error) => console.log(error))
+}
+getUserList();
+
+// rendering data from json file or server with async await
+async function getUsers() {
+  const response = await fetch('http://localhost:3000/users');
+  return response.json();
+}
+
+async function showUsers () {
+ const users = await getUsers();
+ 
+ const userList = document.querySelector('.users');
+ users.forEach((item) => {
+   userList.innerHTML += `
+    <ol>
+        <li>${item.name}</li>
+        <li>${item.surname}</li>
+        <li>${item.sex}</li>
+        <li>${item.age}</li>
+     </ol>
+   `
+ })
+}
+showUsers();
+
+
+ 
+

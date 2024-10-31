@@ -25,7 +25,7 @@ console.log(newAnyStr);
 const anyStr2 = newAnyStr.join('');
 console.log(anyStr2);
 
-// Metod /n and the same resalt with ``
+// Method /n and the same result with ``
 
 const brokenLine = 'I am a broken line.\nI am a broken line.\nI am a broken line.';
 console.log(brokenLine);
@@ -104,10 +104,10 @@ const anyString2 = 'Hello,world!';
 console.log(anyString2.toUpperCase());
 console.log(anyString2.toLowerCase());
 
-// Metod repeat() copys a string
+// Method repeat() copies a string
 
 const originString = 'hello';
-const copyString = originString.repeat(3);// copys a string 3 times
+const copyString = originString.repeat(3);// copies a string 3 times
 console.log(copyString);
 
 const copyArray = originString.split(''); // works with origin string. Does'nt work with copy string
@@ -138,7 +138,7 @@ const anyString31 = 'Hello,world!Hello,people!';
 
 console.log(anyString31.lastIndexOf('Hello'));
 
-// Method includes() insted of  Method indexOf() returns true or false
+// Method includes() instead of  Method indexOf() returns true or false
 
 const anyString4 = 'Hello,world!';
 
@@ -198,7 +198,7 @@ const newSomeWords5 = someWords.split('',7); // returns array with each letter a
 console.log(newSomeWords5);
 
 
-// Cycle 'for of ' Eumeration method for strings
+// Cycle 'for of ' iteration method for strings
 
 const anyString9 = 'Show me everything!';
 
@@ -207,5 +207,185 @@ for(let char of anyString9) {
 }
 
 
+// Another list of string methods
 
+// string declaration
+let str1 = 'Coding is good';
+const str2 = new String('life is good');
+
+console.log(str1); // Coding is good
+console.log(str2); // String {'life is good'}
+
+console.log(typeof str1); // string
+console.log(typeof str2); // object
+
+// property length
+
+console.log(str1.length); // 14
+
+// string indexing  two ways
+
+console.log(str1[0]);
+console.log(str1[3]);
+console.log(str1[str1.length -1]); // indexing from the end of string
+
+console.log(str1.at(2));
+console.log(str1.at(6));
+console.log(str1.at(-2));// indexing from the end of string
+
+
+// method toString() makes a string from array and from new String
+
+console.log(str2.toString()); // life is good
+
+const arr1 = ['Hello', 'people', 'how', 'are', 'you', '?'];
+console.log(arr1);
+console.log(arr1.toString(' ')); //Hello,people,how,are,you,?
+
+// split() and join()
+
+const arr = str1.split(' ');
+console.log(arr);
+arr.splice(2,0, 'very');
+console.log(arr);
+str1 = arr.join(' ');
+console.log(str1); // Coding is very good
+
+// method substring cuts letters from string like slice in arrays
+
+const str3 = 'goodby';
+const str4 = str3.substring(0, 4);
+console.log(str4); // good
+console.log(str3); // goodby - is not changed
+
+
+// slice
+
+const str11 = 'Listen to me';
+const str12 = str11.slice(0, 6);
+console.log(str12); // Listen
+
+
+
+// indexof lastIndexOf includes
+
+const str5 = 'sometimes you are wrong, but just sometimes';
+
+console.log(str5.indexOf('sometimes')); // returns the first found result - 0
+console.log(str5.lastIndexOf('sometimes'));// returns the last found result - 34
+
+// indexOf with second parameter that points from where it needs to look for
+console.log(str5.indexOf('are', 10)); // returns index 14
+console.log(str5.indexOf('are', 16)); // returns -1
+
+// if substring is not found it returns -1
+
+console.log(str5.indexOf('summer')); //  returns -1
+console.log(str5.indexOf('summer') == -1); //  returns true
+console.log(str5.indexOf('summer') !== -1); //  returns false
+
+// indexOf with if else
+
+if(str5.indexOf('summer') == -1) {
+  console.log('not found');
+}else {
+  console.log(str5.indexOf('summer'));
+}
+
+if(str5.indexOf('wrong') == -1) {
+  console.log('not found');
+}else {
+  console.log(str5.indexOf('wrong'));
+}
+//method includes()
+
+console.log(str5.includes('no')); // returns true or false
+
+// includes() with second parameter that points from where it needs to look for
+
+console.log(str5.includes('you', 10)); // returns true or false
+
+// includes with if else
+
+if(str5.includes('are')) {
+  console.log('true');
+} else {
+  console.log('false');
+}
+
+
+// startsWith() endsWith()
+
+console.log(str5.startsWith('some')); // true
+console.log(str5.endsWith('times')); // true
+
+// method repeat
+
+const greeting = 'Hello!';
+console.log(greeting.repeat(3)); // Hello!Hello!Hello!
+
+
+// replace() and replaceAll()
+
+const str6 = 'andrew, alex'; 
+const str7 = str6.replace('a', 'A');
+const str8 = 'ever say ever'
+const str8All = str8.replaceAll('ever', 'never')
+console.log(str6); // andrew, alex
+console.log(str7); // Andrew, alex
+console.log(str8All); // never say never
+
+// replace with regular expression
+
+const story = 'Ever say ever';
+const story1 = story.replace(/ever/gi, 'never');
+console.log(story1);
+
+
+// toUpperCase() and toLowerCase()
+
+const str9 = 'hello';
+const str10 = 'GOODBY';
+
+console.log(str9.toUpperCase());
+console.log(str10.toLowerCase());
+
+// method trim() to remove spaces from the sides of a string
+
+const str14 = '   Andrew    '; 
+console.log(str14); // '   Andrew    '
+console.log(str14.trim()); // 'Andrew'
+
+// methods trimStart()  trimEnd
+
+console.log(str14.trimStart()); // 'Andrew    '
+console.log(str14.trimEnd()); // '   Andrew'
+
+
+// String.fromCharCode()  
+
+console.log(String.fromCharCode(22,44,97,98,30));
+
+// charCodeAt(number of symbol in the string)
+
+console.log('abc'.charCodeAt(0))
+console.log('abc'.charCodeAt(2))
+
+// method String(number) makes string from number
+
+console.log(String(100));
+console.log(typeof String(100)); // string
+
+// concatenation of strings
+
+console.log(str9 + ' ' + str10);
+console.log(`${str9} ${str10}`);
+
+
+
+// cycle 'for of' works with strings
+for(let letter of str1) console.log(letter);
+
+// cycle 'for' works with strings 
+for(let i = 0; i < str1.length; i++) console.log(str1[i]);
 
