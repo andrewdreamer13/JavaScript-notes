@@ -15,8 +15,8 @@ console.log(anyString1[anyString1.length - 1]); // last character in the string
 const anyStr = 'hello,people!';
 console.log(anyStr);
 
-// anyStr[0] = 'H';
-// console.log(anyStr);// does'nt work
+ anyStr[0] = 'H';
+ console.log(anyStr);// does'nt work
 
 const newAnyStr = anyStr.split('');
 console.log(newAnyStr);
@@ -25,7 +25,7 @@ console.log(newAnyStr);
 const anyStr2 = newAnyStr.join('');
 console.log(anyStr2);
 
-// Method /n and the same result with ``
+// Method /n and the same result with backticks ``
 
 const brokenLine = 'I am a broken line.\nI am a broken line.\nI am a broken line.';
 console.log(brokenLine);
@@ -341,6 +341,12 @@ const story = 'Ever say ever';
 const story1 = story.replace(/ever/gi, 'never');
 console.log(story1);
 
+// replace char with override by variable
+
+let anyText = 'Hello, world';
+console.log(anyText);
+anyText = anyText[0] + 'i, baby';
+console.log(anyText);
 
 // toUpperCase() and toLowerCase()
 

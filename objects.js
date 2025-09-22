@@ -216,7 +216,7 @@ console.log(person4);
 delete person4.birthDay;
 console.log(person4);
 
-// Method 'in'  to check the presence or absence an key in object . returns true or false
+// Method 'in'  to check the presence or absence a key in object . returns true or false
 
 const checkArray = {
   model: 'toyota',
@@ -225,8 +225,8 @@ const checkArray = {
   length: 4.5,
 }
 
-console.log('model' in checkArray);
-console.log('height' in checkArray);
+console.log('model' in checkArray); // true
+console.log('height' in checkArray); // false
 
 
 // function as a method of object
@@ -267,7 +267,7 @@ console.log(car2);
 carGo(); // declaration of function carGo 
 car2.isGo(); // declaration of function carGo as a object method isGo
 
-// COPPYING OBJECTS
+// COPYING OBJECTS
 
 // creating another object containing the same link
 
@@ -292,7 +292,7 @@ console.log(someObject);
 // Method   Object.assign()   can create a new object from multiple original objects
 
 const cars5 = {
-  model: 'shevrolet',
+  model: 'chevrolet',
   color: 'yellow',
   width:2,
   length: 4.3,
@@ -385,38 +385,179 @@ console.log(newHouse.window === house.window); // false
 newHouse.window.color = 'white';
 console.log(newHouse);
 
-// object destructuring
+// Deep copying of objects with new method of JS 'structuredClone()' the best way for now
 
-const texts = {
-  text1: "hello",
-  text2: "goodbye",
-  text3: "go away",
-  text4: {
-    textA: 'time to go',
-    textB: 'time to sleep'
+const user = {
+  userName: 'Andrew',
+  userAge: 47,
+  birthday: new Date('1977-01-28').toLocaleDateString(),
+  isMarried: false,
+  children: {
+    daughterOne: {
+      daughterOneName: 'Milana',
+      daughterOneBirthday: new Date('2003-08-19')//.toLocaleDateString()
+    },
+    daughterTwo: {
+      daughterTwoName: 'Polina',
+      daughterTwoBirthday: new Date('2007-04-20')//.toLocaleDateString()
+    },
+  },
+  hasLover: undefined
+}
+
+console.log(user);
+
+const user3 = structuredClone(user);
+console.log(user3);
+console.log(user3 === user); //false
+console.log(user3.children.daughterOne === user.children.daughterOne); //false
+console.log(user3.children.daughterOne === user.children.daughterOne); //false
+
+
+
+
+// Method of deep copying with recursive function
+
+function deepCopy(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  
+  if (Array.isArray(obj)) {
+    let arrCopy = [];
+    obj.forEach((item, i) => {
+      arrCopy[i] = deepCopy(item);
+    });
+    return arrCopy;
   }
+  
+  let copy = {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      copy[key] = deepCopy(obj[key]);
+    }
+  }
+  return copy;
+}
+
+let original = { 
+  name: 'Alice', 
+  details: { age: 30, address: { city: 'Wonderland' } } 
 };
 
-console.log(texts);
-const { text1, text2, text3 = 'away' } = texts; //  object destructuring and default meaning of keys
-console.log(text1, text2, text3);
-console.log(text1);
-console.log(text2);
-console.log(text3);
+let deepCopyObj = deepCopy(original);
+console.log(deepCopyObj); // Outputs: { name: 'Alice', details: { age: 30, address: { city: 'Wonderland' } } }
+console.log(deepCopyObj.details === original.details); // false
+console.log(deepCopyObj.details.city === original.details.city); // true
 
-// replacing object key names with variables
+// Method of deep copying with recursive function that includes handling  Date, Map, Set, and RegExp 
 
-const {text1: griting, text2: parting} = texts;
-console.log(griting);
-console.log(parting);
+function deepCopy(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
 
-// destructuring of nested objects
+  if (Array.isArray(obj)) {
+    let arrCopy = [];
+    obj.forEach((item, i) => {
+      arrCopy[i] = deepCopy(item);
+    });
+    return arrCopy;
+  }
 
-const {text4: {textA, textB}} = texts;
-console.log(textA);
-console.log(textB);
+  if (obj instanceof Date) {
+    return new Date(obj.getTime());
+  }
+
+  if (obj instanceof Map) {
+    return new Map(Array.from(obj.entries()).map(([key, value]) => [deepCopy(key), deepCopy(value)]));
+  }
+
+  if (obj instanceof Set) {
+    return new Set(Array.from(obj).map(value => deepCopy(value)));
+  }
+
+  if (obj instanceof RegExp) {
+    return new RegExp(obj);
+  }
+
+  let copy = {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      copy[key] = deepCopy(obj[key]);
+    }
+  }
+  return copy;
+}
+
+// Example Usage
+let original = { 
+  name: 'Alice', 
+  details: { age: 30, address: { city: 'Wonderland' } },
+  birthdate: new Date(),
+  scores: new Map([['math', 90], ['science', 85]]),
+  favoriteColors: new Set(['red', 'blue'])
+};
+
+let deepCopyObj = deepCopy(original);
+console.log(deepCopyObj);
+
+// Test to verify deep copy
+console.log(original.details === deepCopyObj.details); // Outputs: false
+console.log(original.birthdate === deepCopyObj.birthdate); // Outputs: false
+console.log(original.scores === deepCopyObj.scores); // Outputs: false
+console.log(original.favoriteColors === deepCopyObj.favoriteColors); // Outputs: false
 
 
+// object destructuring . Assigning object's properties to variables
+
+const userData = {
+  userName: 'Andrew',
+  userAge: 47,
+  birthday: new Date('1977-01-28').toLocaleDateString(),
+  isMarried: false,
+  daughters: {
+    daughterOne: 'Milana',
+    daughterTwo: 'Polina'
+  },
+  childrenCount: 2,
+  profession: 'builder',
+  hasLover: true,
+  // hasPet: false
+}
+
+console.log(userData);
+
+
+// destructuring
+const {userName,userAge} = userData;
+console.log(userName,userAge);
+
+// destructuring with variables that were declared before
+let birthday;
+let isMarried;
+
+({birthday, isMarried} = userData);// does'nt work without round brackets
+console.log(birthday, isMarried);
+
+//  destructuring with default property
+
+const {hasLover, hasPet = true} = userData;
+console.log(hasLover, hasPet);
+
+//  destructuring with renaming
+
+const {childrenCount, profession: prof} = userData;
+console.log(childrenCount, prof);
+
+//  destructuring with nested object
+
+const {daughters: {daughterOne, daughterTwo}} = userData;
+console.log(daughterOne, daughterTwo);
+
+// destructuring as a function parameter
+
+function showUser({userName, childrenCount}) {
+  console.log(`${userName} has ${childrenCount} daughters`);
+  
+}
+showUser(userData);
 
 // Methods Object.keys()  and  Object.values() 
 
@@ -499,6 +640,26 @@ Object.freeze(unChanged);
 unChanged.width = 3;
 console.log(unChanged);
 
+// method Object.defineProperty()
+
+const userData = {
+  userName: 'Andrew',
+  userAge: 47,
+  birthday: new Date('1977-01-28').toLocaleDateString(),
+  isMarried: false,
+  hasLover: undefined
+}
+
+Object.defineProperty(userData, 'passport', {
+  value: '34tt58uy',
+  enumerable: false // true or false
+})
+
+const userDataArr = Object.entries(userData);
+console.log(userDataArr);
+userDataArr.map(([index, item]) => console.log(index, item))
+
+
 // Method Object.seal Allows you to change existing properties, but does not allow you to add new ones
 
 const changed = {
@@ -568,7 +729,7 @@ const users1 = {
 users1.showNames();
 users1.showCities();
 
-// cycle for in
+// cycle for in to iterate over an object
 
 const car4 = {
   model: 'mustang',
@@ -593,7 +754,44 @@ for(let key in car4) {
   console.log(car4[key]);   // shows meaning of the keys in object 
 }
 
-// Optional chain with operator '?' Сhecks for the presence of a property in an object
+//  iterating over an object using recursion. It is needed to iterate over nested objects
+
+const nestedObject = {
+  name: "Alice",
+  details: {
+    age: 30,
+    address: {
+      street: "123 Main St",
+      city: "Wonderland"
+    }
+  },
+  hobbies: ["Reading", "Traveling"]
+};
+
+function iterateObject(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+      console.log(`Entering ${key}:`);
+      iterateObject(obj[key]); // Recursion for nested object
+    } else {
+      console.log(`${key}: ${obj[key]}`);
+    }
+  }
+}
+
+iterateObject(nestedObject);
+
+// Outputs:
+// name: Alice
+// Entering details:
+// age: 30
+// Entering address:
+// street: 123 Main St
+// city: Wonderland
+// hobbies: Reading,Traveling
+
+
+// Optional chain with operator '?.' Сhecks for the presence of a property in an object
 // Outputs 'undefined' instead of an 'error'
 
 const firstObject = {
@@ -615,7 +813,7 @@ function getObjInfo(obj) {
 }
 
 getObjInfo(firstObject); // return fast
-getObjInfo(secondObject); // return underfind insted of error
+getObjInfo(secondObject); // return undefine instead of error
 
 
 // prototype inheritance in objects
@@ -654,7 +852,7 @@ const arrowFunction = () => {
   console.log('hello');
 }
 console.log(arrowFunction.__proto__ === Function.prototype); // true    Function is a javascript class
-//console.log(new arrowFunction()); // arrow function does not hahe a constructor
+//console.log(new arrowFunction()); // arrow function does not have a constructor
 
 // first example with prototype inheritance (__proto__)
 
@@ -685,7 +883,7 @@ string.style.cssText = `
 document.body.append(string);
 
 
-// second example with prototipe (__proto__)
+// second example with prototype (__proto__)
 
 const user = {
   'login': '',
@@ -766,16 +964,16 @@ const goodsList = {
    }
  },
 
-click() {
-  const btns = document.querySelectorAll('.button');
-  btns.forEach((btn) => {
-   btn.addEventListener('click', (event) => {
-     console.log(event.target.id);
-     btn.closest('.goods-card').style.backgroundColor = 'green';
-     const newCard =  btn.closest('.goods-card').cloneNode(true);
-     document.body.append(newCard);
-   })
-  })
+  click() {
+    const btns = document.querySelectorAll('.button');
+    btns.forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+      console.log(event.target.id);
+      btn.closest('.goods-card').style.backgroundColor = 'green';
+      const newCard =  btn.closest('.goods-card').cloneNode(true);
+      document.body.append(newCard);
+    })
+    })
 }
  
 }

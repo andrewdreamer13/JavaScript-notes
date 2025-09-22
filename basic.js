@@ -8,10 +8,10 @@
 
 // Variables's  naming style:
 // PascalCase - naming style for Types and Classes
-// camelCase - naming style for all varriables
+// camelCase - naming style for all variables
 // CAPITAL_CASE - naming for not changed constants(for example - passwords)
 
-// Declaration of varriables:
+// Declaration of variables:
 // var - old declaration method
 // let - declaration for variables
 // const - declaration for constants
@@ -30,7 +30,7 @@ const birthDay = 1977; // declaring a constant and assigning a value only in one
 // 3 undefined(undefined) - primitive type
 // 4 null(null) - primitive type
 // 5 boolean(true or false) - primitive type
-// 6 simbol - primitive type
+// 6 symbol - primitive type
 // 7 object(objects or arrays) - link type
 // 8 BigInt - type for a very big numbers
 
@@ -137,8 +137,10 @@ console.log(typeof food); // object
 //  **     exponentiation (2 ** 2 or 2 ** 3)
 //  /     divide
 //  %     reduce division to zero
-//  &&    and  (Always returns value from one of operands)
-//  ||    or  (Always returns value from one of operands)
+// &&    (logical AND) Returns the first falsy operand, or the last one if all are truthy
+// ||    (logical OR)  Returns the first truthy operand, or the last one if all are false
+// ??    (nullish coalescing)  Returns the right operand only if the left is null or undefined
+//        Unlike ||, it does not trigger on false, 0, or '' 
 //  ,     comma
 //  .     access to methods
 //  ...   destructuring operator  (spread operator) Separates object and array into properties
@@ -156,12 +158,12 @@ console.log(typeof food); // object
 
 
 //  function Boolean(value) - shows true or false
-//  false values :
-//  false ,
-//  0 ,
-//  '' ,
-//  undefined ,
-//  null
+// list of false meanings
+  console.log(Boolean(0)); // false
+  console.log(Boolean(NaN)); // false
+  console.log(Boolean('')); // false
+  console.log(Boolean(null)); // false
+  console.log(Boolean(undefined)); // false
 
 
 // JS docs

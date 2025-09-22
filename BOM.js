@@ -65,8 +65,57 @@ const time = setInterval(() => {
   }
 }, 1000);
 
+// example with setInterval and setTimeout
+
+const flowersSrc = [
+  'img/flower1.png',
+  'img/flower2.png',
+  'img/flower3.png',
+  'img/flower4.png',
+  'img/flower5.png',
+  'img/flower6.png',
+  'img/flower7.png'
+];
+
+const flowers = document.querySelector('.flowers__img');
+let currentIndex = 0;
+
+function getFlower() {
+  setInterval(() => {
+    flowers.classList.remove('flowers__img--vis');
+
+    setTimeout(() => {
+      flowers.src = flowersSrc[currentIndex];
+      flowers.classList.add('flowers__img--vis');
+      currentIndex++;
+      if (currentIndex >= flowersSrc.length) {
+        currentIndex = 0;
+      }
+    }, 100);
+
+  }, 3000); 
+}
+
+getFlower();
+
 // clearTimeout()
 // clearInterval()
+
+// example with clearInterval in setTimeout
+
+const flashingText = document.querySelector('.flash');
+
+const flashDelay = setInterval(() => {
+  if(flashingText.style.opacity == 1) {
+    flashingText.style.opacity = 0 ;
+  } else {
+    flashingText.style.opacity = 1
+  }
+}, 1000);
+
+setTimeout(() => {
+  clearInterval(flashDelay)
+}, 9000);
 
 // example with IntersectionObserver
 const body = document.querySelector('body')
@@ -93,7 +142,7 @@ reader.readAsDataURL(file); // reads URL from images, video, audio files
 
 // Data storages:
 // localStorage
-// SesionStorage
+// SessionStorage
 // WebSQL
 // IndexedDB
 

@@ -328,7 +328,7 @@ Object.defineProperties(user, {
 
 
 
-// inherintance in objects
+// inheritance in objects
 // null and undefined do not have __proto__
 
 const object = {water: true, milk: true, sugar: true, coffee: true, cups: true,}

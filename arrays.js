@@ -25,15 +25,14 @@
 // values()          string 638
 // for()             string 663
 // for(of)           string 681
-// forEach()         string 701 
+// forEach()         string 701
 // spread            string 719
 // this              string 785
-
 
 // SIMPLE ARRAYS
 
 // first method to create an array
-const carBrands = ["mazda", "mersedes", "BMW", "opel", "toyota"];
+const carBrands = ["mazda", "mercedes", "BMW", "opel", "toyota"];
 
 console.log(carBrands);
 console.log(carBrands.length);
@@ -44,50 +43,77 @@ console.log(carBrands[1]);
 const numbers = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
 console.log(numbers);
-console.log(numbers.length);
-console.log(numbers[2]);
-console.log(numbers[0]);
-console.log(numbers[8]);
+console.log(numbers.length); // 9
+console.log(numbers[2]); // 30
+console.log(numbers[0]); // 10
+console.log(numbers[8]);// 90
+console.log(numbers[numbers.length - 1]); // 90 lest item by index
+
+// with method at()
+console.log(numbers.at(8)); // 90
+console.log(numbers.at(-1)); // 90 last item by method at()
+
 
 // second method to create an array
 
-const carBrands1 = new Array("mazda", "mersedes", "BMW", "opel", "toyota");
+const carBrands1 = new Array("mazda", "mercedes", "BMW", "opel", "toyota");
 console.log(carBrands1);
 
 // NESTED ARRAYS
 
-const numColection = [
+const numCollection = [
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
   [10, 20, 30, 40, 50, 60, 70, 80, 90],
   [100, 200, 300, 400, 500, 600, 700, 800, 900],
 ];
 
-console.log(numColection);
+console.log(numCollection);
 
-console.log(numColection[0]);
-console.log(numColection[1]);
-console.log(numColection[2]);
+console.log(numCollection[0]);
+console.log(numCollection[1]);
+console.log(numCollection[2]);
 
-console.log(numColection[0][2]);
-console.log(numColection[1][7]);
-console.log(numColection[2][8]);
+console.log(numCollection[0][2]);
+console.log(numCollection[1][7]);
+console.log(numCollection[2][8]);
 
-console.log(numColection[2].length);
-console.log(numColection[1].length + numColection[0].length);
+console.log(numCollection[2].length);
+console.log(numCollection[1].length + numCollection[0].length);
 
 //  ARRAY'S METHODS
 
-// push()  pop()  unshift()  shift()  splise()  slise()  concat()
+//  Method isArray defines array or not array.Returns true or false
 
-const fruits = ["apple", "orange", "plum", "grapes", "chery"];
+const arr1 = [1,2,3,4,5];
+console.log(Array.isArray(arr1));// true 
+
+const text = 'Hello';
+console.log(Array.isArray(text));// false
+
+if(Array.isArray(arr1)) {
+ arr1.push(20);
+ console.log(arr1);
+} else {
+ console.log('Error');
+}
+
+// push()  pop()  unshift()  shift()  splice()  slice()  concat()
+
+const fruits = ["apple", "orange", "plum", "grapes", "cherry"];
 
 console.log(fruits);
 
 fruits.push("banana"); // adds one element to the end
 console.log(fruits);
 
-fruits.push('strawberry', 'blueberry', 'melon'); // adds several elements to the end
+fruits.push("strawberry", "blueberry", "melon"); // adds several elements to the end
 console.log(fruits);
+
+// Method push() returns new length of the array
+
+const res = fruits.push('avocado');
+console.log(res); // new length of fruits
+
 
 // instead of push we can write:
 const arr2 = [1, 2, 3, 4];
@@ -107,7 +133,7 @@ for (let i = arr3.length; i > 0; i--) {
   arr3.pop();
   console.log(arr3);
   if (i === 0) {
-    break
+    break;
   }
 }
 
@@ -115,24 +141,24 @@ for (let i = arr3.length; i > 0; i--) {
 
 let goodsId = [];
 
-const addButton = document.querySelector('.add-index-btn');
-const removeBtn = document.querySelector('.remove-index-btn');
-console.log(goodsId)
+const addButton = document.querySelector(".add-index-btn");
+const removeBtn = document.querySelector(".remove-index-btn");
+console.log(goodsId);
 
-addButton.addEventListener('click', () => {
-  let input = +document.querySelector('.index-input').value;
+addButton.addEventListener("click", () => {
+  let input = +document.querySelector(".index-input").value;
   if (!goodsId.includes(input)) {
     goodsId.push(input);
   }
   console.log(goodsId);
-})
+});
 
-removeBtn.addEventListener('click', () => {
-  let input = +document.querySelector('.index-input').value;
+removeBtn.addEventListener("click", () => {
+  let input = +document.querySelector(".index-input").value;
   let newGoodsId = goodsId.pop();
   console.log(goodsId);
-  console.log(`goods id ${ newGoodsId} was removed`);
-})
+  console.log(`goods id ${newGoodsId} was removed`);
+});
 
 // example with push()
 const arr10 = [1, 2, 3];
@@ -143,13 +169,13 @@ for (let i = 0; i < arr10.length; i++) {
   arr13.push(arr10[i]);
   arr13.push(arr11[i]);
 }
-console.log(arr13)
+console.log(arr13);
 
 // unshift()
 fruits.unshift("banana"); // adds one element to the beginning
 console.log(fruits);
 
-fruits.unshift('watermelon', 'blueberry', 'melon'); // adds several elements to the beginning
+fruits.unshift("watermelon", "blueberry", "melon"); // adds several elements to the beginning
 console.log(fruits);
 
 // shift()
@@ -158,7 +184,6 @@ fruits.shift(); //remove one element from the beginning and returns it
 console.log(fruits);
 console.log(fruits.shift());
 console.log(fruits);
-
 
 // splice() does not create new array.Just changes the existing one
 
@@ -170,8 +195,6 @@ console.log(fruits);
 
 // toSpliced() Copies items which indexes are in brackets and creates new array from them
 // Does not change the source array
-
-
 
 //  slice() Copies items which indexes are in brackets and creates new array from them
 // Does not change the source array
@@ -185,11 +208,11 @@ console.log(newSomeArray);
 const newSomeArray2 = someArray.slice(4, 6); // if slice has 2 parameters - the first is start position,second is finish
 console.log(newSomeArray2);
 
-const anyText = 'hello'; // slice can be applied to string
+const anyText = "hello"; // slice can be applied to string
 const newAnyText = anyText.slice(3, 5);
 console.log(newAnyText);
 
-// concat()  concats 2 or more arrays. Creates new array.Don't changes the previous one
+// concat()  concat 2 or more arrays. Creates new array.Don't changes the previous one
 
 const someArray3 = [1, 2, 3, 4, 5];
 console.log(someArray3);
@@ -211,12 +234,10 @@ console.log(newSomeArray5);
 
 // concat with strings
 
-const str1 = 'Good';
-const str2 = 'Bye';
+const str1 = "Good";
+const str2 = "Bye";
 const str3 = str1.concat(str2);
-console.log(str3)
-
-
+console.log(str3);
 
 // INDEXOF()
 
@@ -279,37 +300,37 @@ showIncludesResalt("Polina", names);
 
 //  includes for objects in arrays
 
-const peopleInfo = [{
+const peopleInfo = [
+  {
     name: "Andrew",
-    age: 45
+    age: 45,
   },
   {
     name: "Irina",
-    age: 48
+    age: 48,
   },
   {
     name: "Milana",
-    age: 18
+    age: 18,
   },
   {
     name: "Anastasia",
-    age: 28
+    age: 28,
   },
   {
     name: "Philip",
-    age: 30
+    age: 30,
   },
 ];
 console.log(peopleInfo);
 
-const lookforName = peopleInfo.filter((item) => {
+const lookForName = peopleInfo.filter((item) => {
   return item.name.includes("ri"); // example with explicit return
 });
-console.log(lookforName);
+console.log(lookForName);
 
-const lookforName2 = peopleInfo.filter((item) => item.name.includes("na"));
+const lookForName2 = peopleInfo.filter((item) => item.name.includes("na"));
 console.log(lookforName2);
-
 
 // MAP()   returns new array with some changes which length == previous array's length
 
@@ -317,7 +338,7 @@ const peopleCount = [1, 2, 3, 4, 5, 6];
 console.log(peopleCount);
 
 const newPeopleCount = peopleCount.map((item, index) => {
-  return `new item - ${index} = ${ item * 2}`; // example with explicit return
+  return `new item - ${index} = ${item * 2}`; // example with explicit return
 });
 console.log(newPeopleCount);
 
@@ -339,25 +360,26 @@ console.log(newFoodList);
 
 //  map() for objects in arrays
 
-const namesInfo = [{
+const namesInfo = [
+  {
     name: "AndRew  ",
-    age: 45
+    age: 45,
   },
   {
     name: "irina",
-    age: 48
+    age: 48,
   },
   {
     name: "  MilaNa",
-    age: 18
+    age: 18,
   },
   {
     name: "anastasia",
-    age: 28
+    age: 28,
   },
   {
     name: "  Philip",
-    age: 30
+    age: 30,
   },
 ];
 console.log(namesInfo);
@@ -371,7 +393,7 @@ console.log(newNamesInfo);
 const newNamesInfo2 = newNamesInfo.map((item) => {
   item.age = item.age - 5;
   return item;
-})
+});
 console.log(newNamesInfo2);
 
 // FILTER()   returns new array with true or false.does not change the origin array
@@ -396,41 +418,48 @@ console.log(newMoneyCount3);
 const newMoneyCount4 = moneyCount.filter((item, index) => index > 3); //works with index
 console.log(newMoneyCount4);
 
-// how to remove NaN from array fith filter
+// how to remove NaN from array with filter
 const someAr = [1, 2, NaN, 3, 4, NaN];
 console.log(someAr);
 let filteredSomAr = someAr.filter((item) => {
   return !Number.isNaN(item);
-} );
+});
 console.log(filteredSomAr); // [1, 2, 3, 4]
 console.log(someAr); // [1, 2, NaN, 3, 4, NaN]
 
+// remove duplicates from array with filter
+let arrayWithDuplicates1 = ['a','b','a'];
+ let uniqueArray1 = arrayWithDuplicates1.filter((item, index) => {
+   return arrayWithDuplicates1.indexOf(item) === index; });
+    console.log(uniqueArray1);
+
 //  filter() for objects in arrays
 
-const salaryInfo = [{
+const salaryInfo = [
+  {
     name: "andrew",
     age: 45,
-    salary: 2000
+    salary: 2000,
   },
   {
     name: "irina",
     age: 48,
-    salary: 12000
+    salary: 12000,
   },
   {
     name: "milana",
     age: 18,
-    salary: 26000
+    salary: 26000,
   },
   {
     name: "anastasia",
     age: 28,
-    salary: 8000
+    salary: 8000,
   },
   {
     name: "philip",
     age: 30,
-    salary: 15000
+    salary: 15000,
   },
 ];
 console.log(salaryInfo);
@@ -438,32 +467,33 @@ console.log(salaryInfo);
 const bigSalary = salaryInfo.filter((item) => item.salary > 2000);
 console.log(bigSalary);
 
-const youngerAge = salaryInfo.filter(item => item.age < 30);
+const youngerAge = salaryInfo.filter((item) => item.age < 30);
 console.log(youngerAge);
 
 // filter with sort
-const sortedBigSalary = salaryInfo.filter((item) => item.salary > 2000).sort((a, b) => b.salary - a.salary);
+const sortedBigSalary = salaryInfo
+  .filter((item) => item.salary > 2000)
+  .sort((a, b) => b.salary - a.salary);
 console.log(sortedBigSalary);
 
-
-// REDUCE()  returns summ of all elements of the array
+// REDUCE()  returns sum of all elements of the array
 
 const someNumbers = [2, 5, 3, 8, 9, 5];
 console.log(someNumbers);
 
 const newSomeNumbers = someNumbers.reduce((accum, item) => {
   return accum + item;
-})
+});
 console.log(newSomeNumbers);
 
 const newSomeNumbers2 = someNumbers.reduce((accum, item) => {
-  return accum + ' ' + item;
-})
+  return accum + " " + item;
+});
 console.log(newSomeNumbers2);
 
 //----------------------------------
 
-const someText = ['text-1', 'text-2', 'text-3', 'text-4'];
+const someText = ["text-1", "text-2", "text-3", "text-4"];
 console.log(someText);
 
 const newSomeText = someText.reduce((accum, item) => {
@@ -479,23 +509,23 @@ console.log(someNumbers3);
 
 const newSomeNumbers3 = someNumbers3.reduce((accum, item) => {
   if (item > 0) {
-    accum += item
+    accum += item;
   }
   return accum;
-})
-console.log(newSomeNumbers3)
+});
+console.log(newSomeNumbers3);
 
 //---------------------------------
 
-const mixArray = ['text1', 2, 'text2', 3, 5, 'text3'];
+const mixArray = ["text1", 2, "text2", 3, 5, "text3"];
 console.log(mixArray);
 
 const newMixArray = mixArray.reduce((accum, item) => {
-  if (typeof item === 'number') {
+  if (typeof item === "number") {
     accum += item;
   }
-  return accum
-}, 0) // sets the initial value of accum
+  return accum;
+}, 0); // sets the initial value of accum
 console.log(newMixArray);
 
 // find the biggest number in array
@@ -507,40 +537,41 @@ const newSomeNumbers4 = someNumbers4.reduce((accum, item) => {
     accum = item;
   }
   return accum;
-})
+});
 console.log(newSomeNumbers4);
 
 // creating new array with reduce()
 
-const idInfo = [{
+const idInfo = [
+  {
     id: 123,
     name: "andrew",
     age: 45,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 124,
     name: "irina",
     age: 48,
-    salary: 12000
+    salary: 12000,
   },
   {
     id: 125,
     name: "milana",
     age: 18,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 126,
     name: "anastasia",
     age: 28,
-    salary: 8000
+    salary: 8000,
   },
   {
     id: 127,
     name: "philip",
     age: 30,
-    salary: 10000
+    salary: 10000,
   },
 ];
 console.log(idInfo);
@@ -548,21 +579,19 @@ console.log(idInfo);
 const newIdInfo = idInfo.reduce((accum, item) => {
   accum.push(item.id);
   return accum;
-}, []) // sets an empty array as initial value of accum
+}, []); // sets an empty array as initial value of accum
 
 console.log(newIdInfo);
 
-
-// ISARRAY  method isArray defines array or not array.Returns true or false
-
-const value1 = 10;
-console.log(Array.isArray(value1));
-
-const value2 = [1, 2, 3, 4, 5];
-console.log(Array.isArray(value2));
-
-const value3 = 'text';
-console.log(Array.isArray(value3));
+// remove duplicates from array with reduce
+let arrayWithDuplicates = [1, 2, 3, 4, 4, 5, 6, 6, 7];
+let uniqueArray = arrayWithDuplicates.reduce((accumulator, currentValue) => {
+  if (!accumulator.includes(currentValue)) {
+    accumulator.push(currentValue);
+  }
+  return accumulator;
+}, []);
+console.log(uniqueArray); // Outputs: [1, 2, 3, 4, 5, 6, 7]
 
 
 // EVERY  every() check an array and return true or false. return true if all the items are true
@@ -572,49 +601,50 @@ console.log(sensorData);
 
 const sensorCheck = sensorData.every((item) => {
   if (item > 0 && item < 20) {
-    return true
+    return true;
   }
-})
+});
 console.log(sensorCheck);
 
 //---------------------------
 
-const clientsInfo = [{
+const clientsInfo = [
+  {
     id: 123,
     name: "andrew",
     age: 45,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 124,
     name: "irina",
     age: 48,
-    salary: 12000
+    salary: 12000,
   },
   {
     id: 125,
     name: "milana",
     age: 18,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 126,
     name: "anastasia",
     age: 28,
-    salary: 8000
+    salary: 8000,
   },
   {
     id: 127,
     name: "philip",
     age: 30,
-    salary: 10000
+    salary: 10000,
   },
 ];
 console.log(clientsInfo);
 
 const clientsCheck = clientsInfo.every((item) => {
   if (item.age < 50) {
-    return true
+    return true;
   }
 });
 console.log(clientsCheck);
@@ -626,11 +656,10 @@ console.log(dataGroup);
 
 const checkDataGroup = dataGroup.some((item) => {
   if (item > 50) {
-    return true
+    return true;
   }
-})
-console.log(checkDataGroup)
-
+});
+console.log(checkDataGroup);
 
 // FIND()  find() look for the first item in array with true and return the first true item.If item is not found return underfind
 
@@ -639,42 +668,43 @@ console.log(anyNumber);
 
 const checkAnyNumber = anyNumber.find((item) => {
   if (item > 20 && item < 40) {
-    return true
+    return true;
   }
-})
+});
 console.log(checkAnyNumber);
 
 //------------------------
 
-const salaryInfo2 = [{
+const salaryInfo2 = [
+  {
     id: 123,
     name: "andrew",
     age: 45,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 124,
     name: "irina",
     age: 48,
-    salary: 12000
+    salary: 12000,
   },
   {
     id: 125,
     name: "milana",
     age: 18,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 126,
     name: "anastasia",
     age: 28,
-    salary: 8000
+    salary: 8000,
   },
   {
     id: 127,
     name: "philip",
     age: 30,
-    salary: 10000
+    salary: 10000,
   },
 ];
 console.log(salaryInfo2);
@@ -683,10 +713,8 @@ const checksalaryInfo2 = salaryInfo2.find((item) => {
   if (item.salary >= 10000) {
     return true;
   }
-
-})
+});
 console.log(checksalaryInfo2);
-
 
 // FINDINDEX  findIndex() look for an item with true and return index of the first true item.If item is not found return -1
 
@@ -695,42 +723,43 @@ console.log(anyNumber2);
 
 const checkAnyNumber2 = anyNumber.findIndex((item) => {
   if (item > 20 && item < 40) {
-    return true
+    return true;
   }
-})
+});
 console.log(checkAnyNumber2);
 
 //-------------------------
 
-const salaryInfo3 = [{
+const salaryInfo3 = [
+  {
     id: 123,
     name: "andrew",
     age: 45,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 124,
     name: "irina",
     age: 48,
-    salary: 12000
+    salary: 12000,
   },
   {
     id: 125,
     name: "milana",
     age: 18,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 126,
     name: "anastasia",
     age: 28,
-    salary: 8000
+    salary: 8000,
   },
   {
     id: 127,
     name: "philip",
     age: 30,
-    salary: 10000
+    salary: 10000,
   },
 ];
 console.log(salaryInfo3);
@@ -739,61 +768,59 @@ const checksalaryInfo3 = salaryInfo2.findIndex((item) => {
   if (item.salary === 8000) {
     return true;
   }
-
-})
+});
 console.log(checksalaryInfo3);
 
 // LASTINDEXOF() lastIndexOf() returns index of last item with the same parameters
 
-const someString = 'hello,people';
+const someString = "hello,people";
 const someNum = [10, 40, 30, 40, 50, 60];
 
-const stringResalt = someString.lastIndexOf('l');
+const stringResalt = someString.lastIndexOf("l");
 console.log(stringResalt);
 
 const someNumResalt = someNum.lastIndexOf(40);
 console.log(someNumResalt);
 
-
-// SPLIT() lets to split a string into an array 
+// SPLIT() lets to split a string into an array
 // can use as a parameter a regular expression
 
-const someWords = 'that summer was very hot';
+const someWords = "that summer was very hot";
 console.log(someWords);
 
 const newSomeWords = someWords.split(); // returns array with 1 item
 console.log(newSomeWords);
 
-const newSomeWords2 = someWords.split(','); // returns array with 1 item
+const newSomeWords2 = someWords.split(","); // returns array with 1 item
 console.log(newSomeWords2);
 
-const newSomeWords3 = someWords.split(''); // returns array with each letter as an item
+const newSomeWords3 = someWords.split(""); // returns array with each letter as an item
 console.log(newSomeWords3);
 
-const newSomeWords4 = someWords.split(' '); // returns array with each word as an item
+const newSomeWords4 = someWords.split(" "); // returns array with each word as an item
 console.log(newSomeWords4);
 
-const newSomeWords5 = someWords.split('', 7); // returns array with each letter as an item and  with pointed amount of items
+const newSomeWords5 = someWords.split("", 7); // returns array with each letter as an item and  with pointed amount of items
 console.log(newSomeWords5);
 
 // JOIN() lets to join items of an array into a string
 
-const someLettersArray = ['a', 'n', 'd', 'r', 'e', 'w'];
-const someWordsArray = ['hello', 'and', 'goodbye'];
+const someLettersArray = ["a", "n", "d", "r", "e", "w"];
+const someWordsArray = ["hello", "and", "goodbye"];
 
-const newSomeString = someLettersArray.join(''); // joins letters into one word
+const newSomeString = someLettersArray.join(""); // joins letters into one word
 console.log(newSomeString);
 
 const newSomeString1 = someLettersArray.join(); // creates a string with comma between letters
 console.log(newSomeString1);
 
-const newSomeString2 = someLettersArray.join(' '); // creates a string with space between letters
+const newSomeString2 = someLettersArray.join(" "); // creates a string with space between letters
 console.log(newSomeString2);
 
-const newSomeString3 = someLettersArray.join(' : '); // creates a string with colon between letters
+const newSomeString3 = someLettersArray.join(" : "); // creates a string with colon between letters
 console.log(newSomeString3);
 
-const newSomeWordsArray = someWordsArray.join(' '); // creates a string with space between words
+const newSomeWordsArray = someWordsArray.join(" "); // creates a string with space between words
 console.log(newSomeWordsArray);
 
 // FLAT() flat() converts a many-dimensional array to a one-dimensional array
@@ -804,7 +831,7 @@ console.log(newSomeWordsArray);
 const dimArray = [2, 3, [78, 89, 0], 56];
 console.log(dimArray);
 
-const flatArray = dimArray.flat(1); // in the brackets there is a depth of penetration into the array 
+const flatArray = dimArray.flat(1); // in the brackets there is a depth of penetration into the array
 console.log(flatArray);
 
 // three-dimensional array
@@ -821,7 +848,7 @@ console.log(flatArray2);
 const originalAr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 console.log(originalAr);
 
-const replacedAr = originalAr.fill('number', 4, 7);
+const replacedAr = originalAr.fill("number", 4, 7);
 console.log(replacedAr);
 console.log(originalAr);
 
@@ -834,7 +861,7 @@ console.log(simpleArray);
 const revArray = simpleArray.reverse();
 console.log(revArray);
 
-const textArr = ['text-1', 'text-2', 'text-3', 'text-4', 'text-5', ]
+const textArr = ["text-1", "text-2", "text-3", "text-4", "text-5"];
 console.log(textArr);
 
 const revTextArr = textArr.reverse();
@@ -844,12 +871,12 @@ console.log(textArr); // the source array was also reversed
 // Method toReversed()
 // reverses new array and does not change the source array
 
- const textArr1 = ['text-1', 'text-2', 'text-3', 'text-4', 'text-5', ]
-  console.log(textArr1);
+const textArr1 = ["text-1", "text-2", "text-3", "text-4", "text-5"];
+console.log(textArr1);
 
-  const revTextArr1 = textArr1.toReversed();
-  console.log(revTextArr1);
-  console.log(textArr1); // the source array was not changed
+const revTextArr1 = textArr1.toReversed();
+console.log(revTextArr1);
+console.log(textArr1); // the source array was not changed
 
 // SORT()
 // sorts new array and changes the source array
@@ -865,24 +892,22 @@ const sortedArray = unsortedArray.sort((a, b) => {
 console.log(sortedArray);
 
 // Method toSorted() sorts new array and does not change the source array
-const letters = ['c', 'b', 'a'];
+const letters = ["c", "b", "a"];
 const sortedLetters = letters.toSorted();
 console.log(letters);
 console.log(sortedLetters);
 
-
 // Method  with() returns new array and does not change the source array
 
-const sourceNumbers = [10,20,30,40,50];
-console.log(sourceNumbers );
-const newNumbers = sourceNumbers.with(2, 'thirty');
-console.log(sourceNumbers );
+const sourceNumbers = [10, 20, 30, 40, 50];
+console.log(sourceNumbers);
+const newNumbers = sourceNumbers.with(2, "thirty");
+console.log(sourceNumbers);
 console.log(newNumbers);
-
 
 // KEYS() Object.keys can get the keys of object in array
 
-const simpleArr = [45, true, 67, 'fox', 34];
+const simpleArr = [45, true, 67, "fox", 34];
 console.log(simpleArr);
 
 const keysSimpleArr = Object.keys(simpleArr);
@@ -890,35 +915,36 @@ console.log(keysSimpleArr);
 
 //---------------------------
 
-const keysInfo = [{
+const keysInfo = [
+  {
     id: 123,
     name: "andrew",
     age: 45,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 124,
     name: "irina",
     age: 48,
-    salary: 12000
+    salary: 12000,
   },
   {
     id: 125,
     name: "milana",
     age: 18,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 126,
     name: "anastasia",
     age: 28,
-    salary: 8000
+    salary: 8000,
   },
   {
     id: 127,
     name: "philip",
     age: 30,
-    salary: 10000
+    salary: 10000,
   },
 ];
 console.log(keysInfo);
@@ -928,7 +954,7 @@ console.log(keysArray);
 
 // VALUES() Object.values can get the value of object in array
 
-const simpleArr2 = [45, true, 67, 'fox', 34];
+const simpleArr2 = [45, true, 67, "fox", 34];
 console.log(simpleArr2);
 
 const valueSimpleArr = Object.values(simpleArr2);
@@ -936,35 +962,36 @@ console.log(valueSimpleArr);
 
 //-------------------------------------
 
-const valueInfo = [{
+const valueInfo = [
+  {
     id: 123,
     name: "andrew",
     age: 45,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 124,
     name: "irina",
     age: 48,
-    salary: 12000
+    salary: 12000,
   },
   {
     id: 125,
     name: "milana",
     age: 18,
-    salary: 2000
+    salary: 2000,
   },
   {
     id: 126,
     name: "anastasia",
     age: 28,
-    salary: 8000
+    salary: 8000,
   },
   {
     id: 127,
     name: "philip",
     age: 30,
-    salary: 10000
+    salary: 10000,
   },
 ];
 console.log(valueInfo);
@@ -972,7 +999,7 @@ console.log(valueInfo);
 const valueArray = Object.values(valueInfo[3]);
 console.log(valueArray);
 
-valueArray.push('kharkiv');
+valueArray.push("kharkiv");
 console.log(valueArray);
 
 // CYCLE FOR  for iterates through an array
@@ -987,10 +1014,10 @@ for (let i = someCount.length; i >= 0; i--) {
   console.log(someCount[i]);
 }
 
-const list = document.querySelectorAll('.list');
+const list = document.querySelectorAll(".list");
 
 for (let i = 0; i < list.length; i++) {
-  console.log(list[i])
+  console.log(list[i]);
 }
 
 // CYCLE FOR OF  for of iterates through an array
@@ -1007,7 +1034,7 @@ for (let item of someCount2) {
   }
 }
 
-const list2 = document.querySelectorAll('.list');
+const list2 = document.querySelectorAll(".list");
 
 for (let item of list2) {
   console.log(item);
@@ -1015,26 +1042,26 @@ for (let item of list2) {
 
 // CYCLE FOREACH  forEach iterates through an array
 
-const myArray = [34, 56, 21, 76, 39, ];
+const myArray = [34, 56, 21, 76, 39];
 
 myArray.forEach((item) => {
-  console.log(item)
-})
+  console.log(item);
+});
 
 myArray.forEach((item, index) => {
-  console.log(`${index} = ${item}`)
-})
+  console.log(`${index} = ${item}`);
+});
 
-const list3 = document.querySelectorAll('.list');
+const list3 = document.querySelectorAll(".list");
 
 list3.forEach((item) => {
-  console.log(item.innerHTML)
-})
+  console.log(item.innerHTML);
+});
 
 // ...   destructuring operator  (spread) how it works
 
 const arrayOfNum = [1, 2, 3, 4, 5];
-const arrayOfStr = ['a', 'b', 'c', 'd'];
+const arrayOfStr = ["a", "b", "c", "d"];
 
 // merge
 
@@ -1046,13 +1073,13 @@ console.log(mergedArr);
 const cloneArr = [...arrayOfStr]; // does not change original array
 console.log(cloneArr);
 
-cloneArr.push('f');
+cloneArr.push("f");
 console.log(cloneArr);
 console.log(arrayOfStr);
 
 // destruction in arrays
 
-const parrentArr = ['one', 'two', 'three'];
+const parrentArr = ["one", "two", "three"];
 const [numberOne, numberTwo] = parrentArr;
 console.log(parrentArr);
 console.log(numberOne);
@@ -1060,39 +1087,36 @@ console.log(numberTwo);
 
 // transform string into array
 
-const strArr = [...'string'];
+const strArr = [..."string"];
 console.log(strArr);
 
 // transform nodeList to array
 
-const someList = document.querySelectorAll('.list');
+const someList = document.querySelectorAll(".list");
 console.dir(someList);
 
 const newSomeList = [...someList];
-console.dir(newSomeList)
-
+console.dir(newSomeList);
 
 // Keyword 'this' for creating a new array's method in Array.prototype
 
 const numbers2 = [3, 7, 4, 9, 1, 4];
 const bigNnumbers = [30, 700, 400, 90, 1000, 40];
 
-
 Array.prototype.devider = function (d) {
   return this.map((item) => {
     return item / d;
-  })
-}
+  });
+};
 
 console.log(numbers2.devider(2));
 console.log(bigNnumbers.devider(10));
 
-
 // prototype inheritance in arrays with __proto__
 // array2 inherits array1 and class Array with all their  properties and methods
 
-const array1 = ['eat', 'sleep', 'code'];
-const  array2 =['run', 'swim',{__proto__:array1}];
+const array1 = ["eat", "sleep", "code"];
+const array2 = ["run", "swim", { __proto__: array1 }];
 console.log(array1); //  ['eat', 'sleep', 'code']
 console.log(array2); //  ['run', 'swim', Array]
 console.log(array2[0]); // 'run'

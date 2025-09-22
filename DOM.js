@@ -1,24 +1,10 @@
-
 // DOM - Document Object Model
 
-const html = document.documentElement; // Object html
-const body = document.body; // Object body
-const head = document.head; // Object head
-console.log(html, body, head);
-console.log(document.documentURI); //http://127.0.0.1:5500/
-console.log(document.title);//  <title>JavaScript basic</title> - content of the title tag
-console.log(document.referrer); // shows URL of the page from which an user have come to the current page (http://127.0.0.1:5500/)
-
-// Object Image()
-// how to change src at any image in html
-const img = new Image();
-img.srs = 'images/team-1.jpg';
-
-const image1 = document.querySelector('#image1');
-image1.src = img.srs;
-console.log(image1.width)
-console.log(image1.height)
-console.log(image1.src);
+// Objects for interaction in DOM tree
+// document - entry point to the HTML document
+// element nodes - HTML tags
+// text nodes - text in the tags
+// comments - elements with comments
 
 
 // NODES
@@ -27,7 +13,15 @@ console.log(image1.src);
 // document.head - head tag
 // document.body - body tag
 
-// Property 'childNodes ' - child nodes. HTML colection(pseudo-array).Has property 'length'
+const html = document.documentElement; // Object html
+const body = document.body; // Object body
+const head = document.head; // Object head
+console.log(html, body, head);
+console.log(document.documentURI); //http://127.0.0.1:5500/
+console.log(document.title); //  <title>JavaScript basic</title> - content of the title tag
+console.log(document.referrer); // shows URL of the page from which an user have come to the current page (http://127.0.0.1:5500/)
+
+// Property 'childNodes ' - child elements of a tag. HTML Collection(pseudo-array).Has property 'length'
 
 for (let child of document.body.childNodes) {
   console.log(child);
@@ -80,7 +74,7 @@ console.log(linkBox2.children.length); // console.log length of children collect
 console.log(linkBox2.firstElementChild);
 console.log(linkBox2.lastElementChild);
 
-// property 'parentElement'
+// property 'parentElement'- shows parent of element
 
 console.log(linkBox2.parentElement); // shows parent of element
 console.log(link3.parentElement); // shows parent of item
@@ -91,21 +85,19 @@ console.log(link4.parentElement); // shows parent of item
 console.log(linkBox2.previousElementSibling); // shows previous neighbour of element
 console.log(linkBox2.nextElementSibling); // shows next neighbour of element
 
-console.log(link3.nextElementSibling); //  shows next neighbour of element
+console.log(link3.nextElementSibling); //  shows next neigрbour of element
 console.log(link4.previousElementSibling); //  shows previous neighbour of element
-
-
 
 // METHODS FOR SEARCHING ELEMENTS IN DOM
 
-// OLD METHODS  getElementsByTagName(tag)  getElementsByClassName(class)  getElementsByName(name) return alive colection
+// OLD METHODS  getElementsByTagName(tag)  getElementsByClassName(class)  getElementsByName(name) return alive Collection
 
-//  getElementsByTagName(tag)  returns colection of tags
+//  getElementsByTagName(tag)  returns Collection of tags
 
 const tags = document.getElementsByTagName("div");
 console.log(tags);
 
-//  getElementsByClassName(class)  return colections of elements with class name
+//  getElementsByClassName(class)  return Collections of elements with class name
 
 const lies = document.getElementsByClassName("item");
 console.log(lies);
@@ -114,7 +106,7 @@ for (let li of lies) {
   li.style.fontSize = 25 + "px";
 }
 
-//  getElementsByName(name)  returns colection of atributes names
+//  getElementsByName(name)  returns Collection of attributes names
 
 const btns = document.getElementsByName("radio");
 console.log(btns);
@@ -145,8 +137,6 @@ for (let i = 0; i < items.length; i++) {
   console.log(items[i]);
   items[i].style.fontSize = 30 + "px";
 }
-
-
 
 // Method matches  returns true  or  false
 
@@ -183,15 +173,21 @@ if (parent1.contains(child1)) {
 
 // DOM NODE PROPERTIES
 
-// property nodeName   Shows names of tags
+console.log(document.body.constructor.name); // HTMLBodyElement
+console.log(document.body instanceof HTMLBodyElement); // true
 
-console.log(body.nodeName);
+console.log(document.querySelector('div').constructor.name); // HTMLDivElement
+console.log(document.querySelector('div') instanceof HTMLDivElement); // true
+
+// property nodeName   Shows names of nodes in the document
+
+console.log(body.nodeName); // BODY
 console.log(document.querySelector(".parent-1").nodeName);
 console.log(document.querySelector(".some-text").nodeName);
 
 // property tagName   Shows names of tags
 
-console.log(body.tagName);
+console.log(body.tagName); // BODY
 console.log(document.querySelector(".parent-1").tagName);
 console.log(document.querySelector(".some-text").tagName);
 
@@ -205,7 +201,7 @@ document.querySelector(".link-box3").innerHTML =
 document.querySelector(".link-box3").innerHTML += "<p>Some text</p>";
 
 // property outerHTML allows to read and change content of tag.
-// Allows to add a new tag into the existing tag and insted of the existing tag
+// Allows to add a new tag into the existing tag and instead of the existing tag
 
 console.log(document.querySelector(".some-title"));
 document.querySelector(".some-title").outerHTML =
@@ -230,11 +226,11 @@ const hiddenText = document.querySelector(".hidden-text");
 hiddenText.hidden = true;
 
 setInterval(() => {
-   return hiddenText.hidden = !hiddenText.hidden;
+  return (hiddenText.hidden = !hiddenText.hidden);
 }, 1000);
 
 // ATTRIBUTES
-// we can get standart atributes with .(dot) like a property in object console.log(img.src)
+// we can get standard attributes with .(dot) like a property in object console.log(img.src)
 
 const img = document.querySelector(".team-img");
 
@@ -280,16 +276,19 @@ const block = document.querySelector(".block");
 
 block.style.background = block.getAttribute("data-bg");
 
-// Property dataset for 'data-' atrbutes
+// Property dataset for 'data-' attributes
 
 console.log(block.dataset.bg); // gets meaning of 'data-bg'
 block.dataset.bg = "#000";
 console.log(block.dataset.bg);
 block.style.background = block.getAttribute("data-bg");
 
+title.setAttribute('data-num', '20');
+console.log(title.dataset.num); // 20
+
 // CREATING and adding DOM elements
 
-// Method 'createElement' - cretes new element in HTML document
+// Method 'createElement' - creates new element in HTML document
 
 let circle = document.createElement("div"); //creating new element
 circle.className = "new"; // assigning a class to a new element
@@ -298,6 +297,25 @@ circle.innerHTML = "I am a circle"; // assigning content to a new element
 // Method 'node.append(elem)' - adds new element to the end of the pointed node
 
 document.body.append(circle);
+
+const list = document.querySelector(".list");
+const arr = ["apple", "banana", "orange", "grapes", "plum"];
+
+let currentIndex = 0;
+
+function addListItem() {
+  if (currentIndex < arr.length) {
+    let li = document.createElement("li");
+    li.textContent = arr[currentIndex];
+    list.appendChild(li);
+    currentIndex++;
+  } else {
+    clearInterval(intervalId);
+  }
+}
+
+const intervalId = setInterval(addListItem, 2000);
+
 
 // Method 'node.prepend(elem)' - adds new element to the beginning of the pointed node
 
@@ -319,6 +337,18 @@ teamImg.replaceWith(circle);
 // Method 'node.remove()' - removes element from DOM
 
 document.querySelector(".block2").remove();
+
+const list = document.querySelector('ul');
+
+const liRemove = setInterval(() => {
+  if(list.lastElementChild == null) {
+    clearInterval(liRemove);
+    console.log('No more items');
+    
+  }else {
+    list.lastElementChild.remove();
+  }
+  },1000)
 
 // Method cloneNode(true) - creates element's copy with all children inside
 
@@ -363,7 +393,6 @@ fruitList.insertAdjacentHTML("afterend", "<hr><h2>End of the list");
 
 // Method node.insertAdjacentText  insert only text
 
-
 //  STYLE MANAGEMENT
 
 // Method className gets class of element, can change class name in pointed element
@@ -373,7 +402,7 @@ console.log(document.querySelector("ul.fruits").className); // gets class of ele
 const bigBox2 = document.querySelector(".big-box2");
 bigBox2.className = "new-style"; // change class name
 
-// Method classList  -  colection of styles
+// Method classList  -  Collection of styles
 
 // classList.add()
 
@@ -384,7 +413,7 @@ for (let cl of bigBox2.classList) {
   console.log(cl);
 }
 
-// clasList.remove()
+// classList.remove()
 
 bigBox2.classList.remove("red");
 
@@ -421,27 +450,24 @@ console.log(getStylesAfter.backgroundColor); // shows one pointed style
 
 // example with getComputedStyle()
 
-const item = document.querySelector('.figura__item');
+const item = document.querySelector(".figura__item");
 setInterval(() => {
-    
   let styles = getComputedStyle(item);
   let left = parseFloat(styles.left);
   let top = parseFloat(styles.top);
 
-  if(left < 150) {
-    item.style.left = left + 10 + 'px'
+  if (left < 150) {
+    item.style.left = left + 10 + "px";
   }
-  if(top >= 140) {
-    top = 140
+  if (top >= 140) {
+    top = 140;
   }
-   if(top >= 0 && left === 150) {
-    item.style.top = top + 10 + 'px';
-   } 
- 
+  if (top >= 0 && left === 150) {
+    item.style.top = top + 10 + "px";
+  }
 }, 100);
 
-
-// Method getBoundingClientrect() - gets parameters width,height,left,top,right,bottom of the pointed element relative to the browser window
+// Method getBoundingClientRect() - gets parameters width,height,left,top,right,bottom of the pointed element relative to the browser window
 
 const fixedElem = document.querySelector(".fixed-elem");
 
@@ -454,7 +480,6 @@ console.log(clientTop); // distance to the top of window
 const pageTop = clientTop + window.scrollY; //  window.scrollY;
 console.log(pageTop); // distance to the top of html document
 
-
 const getPosition = bigBox2.getBoundingClientRect();
 console.log(getPosition); // top left bottom right width height
 console.log(getPosition.height); // height
@@ -464,166 +489,154 @@ console.log(getPosition.left); // left
 
 console.log(parseInt(getStylesAfter.width)); // shows one pointed style
 
-
 // METRICS
 
-// Property window.innerWidth  - shows width of the browser window with scroll track
+const metrics = document.querySelector('.metrics');
+const metricsText = document.querySelector('.metrics__text');
+const metricsTextSpan = document.querySelector('.metrics__text > span');
+const html = document.documentElement;
 
+// window metrics
+
+// window.innerWidth - width of the browser window include scrollbar
 console.log(window.innerWidth);
 
-// Property window.innerHeight  - shows height of the browser window  with scroll track
-
+//  window.innerHeight - height of the browser window include scrollbar
 console.log(window.innerHeight);
 
-const box3 = document.querySelector(".box-3");
-const box4 = document.querySelector(".box-4");
+// window.scrollY - shifting page up relative to the top of HTML document (window.scrollY = html.scrollTop)
+console.log(window.scrollY);
 
-// Property elem.offsetWidth - full width of the element
-
-console.log(box3.offsetWidth);
-console.log(box4.offsetWidth);
-
-// Property elem.offsetHeight - full height of the element
-
-console.log(box3.offsetHeight);
-console.log(box4.offsetHeight);
-
-// Property elem.clientWidth  - basic width of element + padding - scroll track(15px) if it exists (only readable)
-// also shows  width of the html document without scroll track
-
-console.log(box3.clientWidth); // with border
-console.log(box4.clientWidth); // with outline
-console.log(document.documentElement.clientWidth); // width of the html
-
-// Property  elem.clientHeight - basic height of element + padding - scroll track(15px) if it exists (only readable)
-// also shows  height of the html document without scroll track
-
-console.log(box3.clientHeight); // with border
-console.log(box4.clientHeight); // with outline
-console.log(document.documentElement.clientHeight); // height of the html
-
-// offsetTop and offsetLeft - element's distantce from the parent
-// If parent element has position relative in css -  offsetTop and offsetLeft will be from the parent
-// If parent element has position static in css -  offsetTop and offsetLeft will be from the body
-
-const gridItem1 = document.querySelector('.grid__item[data-color="black"]');
-console.log(gridItem1.offsetTop);
-console.log(gridItem1.offsetLeft);
-
-// offsetParent and parentElement
-
-const gridItem2 = document.querySelector('.grid__item[data-color="red"]');
-console.log(gridItem2.offsetParent); // Shows body
-console.log(gridItem2.parentElement); // Shows div class="grid"
-
-
-// Property elem.clientLeft -  an indent the inner part of the element from the outer part on the left
-
-const textBox = document.querySelector(".some-box");
-console.log(textBox.clientLeft);
-
-// Property elem.clientTop - an indent the inner part of the element from the outer part on the  top
-
-console.log(textBox.clientTop);
+// window.scrollX - shifting page left relative to the left of HTML document (window.scrollX = html.scrollLeft)
+console.log( window.scrollX);
 
 // coordinates pageX and pageY
 // shows coordinates relative to the document(body)
 
-window.addEventListener('click', (event) => {
+window.addEventListener("click", (event) => {
   console.log(event.pageX);
   console.log(event.pageY);
-})
+});
 
 // coordinates clientX and clientY
 // shows coordinates relative to the browser window
 
-window.addEventListener('click', (event) => {
+window.addEventListener("click", (event) => {
   console.log(event.pageX);
   console.log(event.pageY);
-})
-
-// Method getBoundingClientrect() - gets parameters width,height,left,top,right,bottom of the pointed element relative to the browser window
-
-const fixedElem1 = document.querySelector(".fixed-elem");
-
-console.log(fixedElem1.getBoundingClientRect());
-console.log(fixedElem1.getBoundingClientRect().left);
-console.log(fixedElem1.getBoundingClientRect().top);
-
-
-
-// Property elem.scrollWidth - element width with scrolling inside the element  (only readable)
-
-console.log(box3.scrollWidth);
-console.log(document.body.scrollWidth);
-
-// Property elem.scrollHeight - element height with scrolling inside the element  (only readable)
-
-console.log(box3.scrollHeight);
-console.log(document.body.scrollHeight);
-
-// Property elem.scrollTop - the height by which the element is scrolled up  (can be changed)
-
-console.log(document.documentElement.scrollTop); // can be used for html and body
-
-box3.addEventListener("scroll", () => {
-  console.log(box3.scrollTop);
 });
 
-box3.addEventListener("click", () => {
-  box3.scrollTop += 20;
-});
+// window.scrollBy(offsetX, offsetY) - scroll the page relative to its current position by offsetX, offsetY pixels
+// html.addEventListener('click', scrollWindow);
 
-// Property elem.scrollLeft - the width by which the element is scrolled left (can be changed)
-
-console.log(document.documentElement.scrollLeft); // can be used for html and body
-
-box3.addEventListener("scroll", () => {
-  console.log(box3.scrollLeft);
-});
-
-box3.addEventListener("mouseenter", () => {
-  box3.scrollLeft += 20;
-});
-
-
-// Property'window.pageYOffset' or 'window.scrollY'  shifting the document vertically in px( amount of scrolled pixels)
-
-console.log(window.pageYOffset);
-console.log(window.scrollY);
-
-// Property 'window.pageXOffset' or 'window.scrollX' shifting the document  horizontaly in px( amount of scrolled pixels)
-
-console.log(window.pageXOffset);
-console.log(window.scrollX);
-
-// Method for scrolling  - window.scrollBy(X, Y)- scrolls the page from its current position by( X ,Y). Smooth scrolling
-
-const transBtn2 = document.querySelector(".translate-btn2");
-
-transBtn2.addEventListener("click", () => {
+function scrollWindow () {
   window.scrollBy(0, 50);
-});
+}
 
-// Method for scrolling - window.scrollTo(X, Y)- scrolls the page from its current position to the pointed coordinates (X, Y). Smooth scrolling
-const transBtn3 = document.querySelector(".translate-btn3");
+// window.scrollTo(pageX, pageY) - scroll the page to the pointed coordinate
+html.addEventListener('click', scrollWindowTo);
 
-transBtn3.addEventListener("click", () => {
+function scrollWindowTo () {
   window.scrollTo(0, 500);
-});
+}
 
-// Method scrollTo() - as an object with options. Does not work in safary browser
+// Method scrollTo() - as an object with options. Does not work in safari browser
 
-const scrollButton = document.querySelector('#scroll');
-scrollButton.addEventListener('click', scrollToOptions);
+const scrollButton = document.querySelector("#scroll");
+scrollButton.addEventListener("click", scrollToOptions);
 
 function scrollToOptions() {
   window.scrollTo({
-    left:0,
-    top:1000,
-    behavior:'smooth' // smooth, instant, auto
-  })
+    left: 0,
+    top: 1000,
+    behavior: "smooth", // smooth, instant, auto
+  });
 }
+
+// elements metrics
+
+// offsetParent and parentElement
+console.log(metrics.offsetParent); // Shows body
+console.log(metrics.parentElement); // Shows body
+console.log(metricsText.offsetParent); //  Shows div class="metrics"
+console.log(metricsText.parentElement); // Shows div class="metrics"
+console.log(metricsTextSpan.offsetParent); //  Shows div class="metrics"
+console.log(metricsTextSpan.parentElement); // Shows p class="metrics__text"
+
+
+// clientHeight = height of the visible content part within(inside) the block + padding(minus border and scroll)
+console.log(metrics.clientHeight);
+console.log(html.clientHeight);
+
+
+//  clientWidth = width of the visible content part within(inside) the block + padding(minus border and scroll)
+console.log(metrics.clientWidth);
+console.log(html.clientWidth);
+
+// scrollTop - shifting content up relative to the parent block
+console.log(metrics.scrollTop);
+console.log(html.scrollTop);
+
+
+// scrollLeft - shifting content left relative to the parent block
+console.log(metrics.scrollLeft);
+console.log(html.scrollLeft);
+
+
+// scrollHeight - full height of the content
+console.log(metrics.scrollHeight);
+console.log(html.scrollHeight);
+
+
+// scrollWidth - full Width of the content
+console.log(metrics.scrollWidth);
+console.log(html.scrollWidth);
+
+// example with setInterval
+
+setInterval(() => {
+  console.log(metrics.scrollTop,metrics.scrollLeft,metrics.scrollHeight,metrics.scrollWidth);
+  
+}, 2000);
+
+// changing of scrollTop and scrollLeft
+
+metrics.addEventListener('click', changePosition);
+// html.addEventListener('click', changePosition);
+
+function changePosition () {
+  this.scrollTop += 20; // adds 20 px to the current position
+  this.scrollLeft += 20; // adds 20 px to the current position
+}
+
+// offsetTop and offsetLeft - element's distance from the parent
+// If parent element has position relative in css -  offsetTop and offsetLeft will be from the parent
+// If parent element has position static in css -  offsetTop and offsetLeft will be from the body
+
+// offsetTop - contains the coordinate of the block relative to the top of the html document (body)
+console.log(metrics.offsetTop);
+
+// offsetLeft - contains the coordinate of the block relative to the left of html document (body)
+console.log(metrics.offsetLeft);
+
+// offsetWidth - width of the element including all paddings(full width) = width in CSS styles
+console.log(metrics.offsetWidth);
+
+// offsetHeight - height of the element including all paddings(full height) = height in CSS styles
+console.log(metrics.offsetHeight);
+
+
+// clientTop - offset within the block from the top edge. Equal to border width
+console.log(metrics.clientTop);
+
+// clientLeft - offset within the block from the left edge. Equal to border width
+console.log(metrics.clientLeft);
+
+// Method getBoundingClientRect() - gets parameters width,height,left,top,right,bottom of the pointed element relative to the browser window
+
+console.log(metrics.getBoundingClientRect());
+console.log(metrics.getBoundingClientRect().left);
+console.log(metrics.getBoundingClientRect().top);
 
 // Method elem.scrollIntoView(true) - translates the pointed element to the top of the window
 
@@ -643,19 +656,16 @@ transBtn1.onclick = () => {
   document.querySelector(".translate").scrollIntoView(false);
 };
 
-
 // elementsFromPoint(x, y) - shows the deepest element from pointed coordinates in visible part of the window
 
 let getElem = document.elementsFromPoint(243, 318);
 console.log(getElem);
 
-
-
 // TABLE PROPERTIES
 
 const table = document.querySelector("table");
 
-// 1 - table.rows - '<tr></tr>' colection
+// 1 - table.rows - '<tr></tr>' Collection
 
 console.log(table.rows[0]);
 table.rows[1].style.background = "pink";
@@ -676,7 +686,7 @@ console.log(table.tFoot);
 table.tFoot.style.background = "blue";
 
 // 5 - table.tBodies - '<tbody></tbody>'
-// 6 - tr.cells - '<th></th>' and '<td></td>' colection
+// 6 - tr.cells - '<th></th>' and '<td></td>' Collection
 
 console.log(table.rows[1].cells[1].innerHTML);
 table.rows[1].cells[1].style.background = "green";
@@ -696,49 +706,56 @@ table.rows[1].cells[1].style.background = "green";
 // console.log(window.pageYOffset);
 // console.log(window.pageXOffset);
 
+// Object Image()
+// how to change src at any image in html
+const img = new Image();
+img.srs = "images/team-1.jpg";
 
-
+const image1 = document.querySelector("#image1");
+image1.src = img.srs;
+console.log(image1.width);
+console.log(image1.height);
+console.log(image1.src);
 
 //  slider
-const slider = document.querySelector('.slider');
-const sliderTrack = document.querySelector('.slider__track');
-const nextBtn = document.querySelector('.next-button');
-const prevBtn = document.querySelector('.prev-button');
-const imagesBox = document.querySelectorAll('.slider__img-box');
-const images = document.querySelectorAll('.slider__img');
+const slider = document.querySelector(".slider");
+const sliderTrack = document.querySelector(".slider__track");
+const nextBtn = document.querySelector(".next-button");
+const prevBtn = document.querySelector(".prev-button");
+const imagesBox = document.querySelectorAll(".slider__img-box");
+const images = document.querySelectorAll(".slider__img");
 
 let count = 0;
 
-nextBtn.addEventListener('click', (event) => {
+nextBtn.addEventListener("click", (event) => {
   count++;
   if (count >= imagesBox.length) {
     count--;
   } else {
     imagesBox.forEach((item) => {
       item.style.transform += `translateX(-100%)`;
-    })
+    });
     //  console.log( event.target);
     //   console.log( event.currentTarget);
   }
-  images[count].classList.add('active');
-  images[count - 1].classList.remove('active');
-})
+  images[count].classList.add("active");
+  images[count - 1].classList.remove("active");
+});
 
-prevBtn.addEventListener('click', (event) => {
+prevBtn.addEventListener("click", (event) => {
   count--;
   if (count < 0) {
     count = 0;
   } else {
     imagesBox.forEach((item) => {
       item.style.transform += `translateX(100%)`;
-    })
+    });
     // console.log( event.target);
     //  console.log( event.currentTarget);
-    images[count].classList.add('active');
-    images[count + 1].classList.remove('active');
+    images[count].classList.add("active");
+    images[count + 1].classList.remove("active");
   }
-
-})
+});
 // const sliderTopWindow = slider.getBoundingClientRect().top;
 // console.log( sliderTopWindow)
 // const sliderTopHtml = sliderTopWindow + window.pageYOffset;
@@ -754,15 +771,9 @@ prevBtn.addEventListener('click', (event) => {
 // console.log(sliderTrack.offsetLeft);
 // console.log(sliderTrack.offsetParent);
 
-
-const elementDiv = document.createElement('div');
-elementDiv.className = 'new-div';
+const elementDiv = document.createElement("div");
+elementDiv.className = "new-div";
 elementDiv.innerHTML = '<div class="inner">I am an inner</div>';
-document.querySelector('.wrapper').append(elementDiv);
-console.log(elementDiv)
-console.log(elementDiv.querySelector('.inner'));
-
-
-
-
-
+document.querySelector(".wrapper").append(elementDiv);
+console.log(elementDiv);
+console.log(elementDiv.querySelector(".inner"));

@@ -1,15 +1,34 @@
 // NUMBERS
 
+// ways to create number
+
+let numb1 = 100;
+console.log(numb1); // 100
+
+let numb2 = Number(34);
+console.log(numb2); // 34
+
+let numb3 = new Number(50);
+console.log(numb3); // object Number {50}
+numb3 = numb3.valueOf();
+console.log(numb3); // 50
+
+
 // Method  toString
 
 const num = 255;
 
-console.log(num.toString()); //   calling a method toString() on a variable  (resalt -  255)
-console.log(num.toString(2)); //  calling a method toString() on a variable (resalt - 11111111)
-console.log(num.toString(16)); // calling a method toString() on a variable (resalt - ff)
+console.log(num.toString()); //   calling a method toString() on a variable  (result -  255)
+console.log(num.toString(2)); //  calling a method toString() on a variable (result - 11111111)
+console.log(num.toString(16)); // calling a method toString() on a variable (result - ff)
 console.log(255..toString()) //    calling a method toString() on a number using the 'dot' operator
 console.log((255).toString()); // calling a method toString() on a number using rounded braces '()'
 
+// Method Number - makes number from string or we can use operator +
+
+const num4 = 10.456;
+console.log(Number(num4.toFixed(1)));
+console.log(+num4.toFixed(1));
 
 // Object Math
 
@@ -30,13 +49,19 @@ console.log(Math.trunc(3.6)); // returns 3
 // Method toFixed()
 const num2 = 23.34567;
 
-console.log(num2.toFixed(1)); // rounding the fractional part of a number returns string
-console.log(num2.toFixed(2)); // rounding the fractional part of a number returns string
-console.log(num2.toFixed(4)); // rounding the fractional part of a number returns string
+console.log(num2.toFixed(1)); // cut the fractional part of a number returns string
+console.log(num2.toFixed(2)); // cut the fractional part of a number returns string
+console.log(num2.toFixed(4)); // cut the fractional part of a number returns string
 
 console.log(+(0.1 + 0.2).toFixed(1)); // Method how to return number 
 console.log(Number((0.1 + 0.2).toFixed(1))); // Method how to return number
 
+// Method toPrecision(2) cuts numbers from beginning. Returns a string
+
+const num6 = 34.5678;
+console.log(num6.toPrecision(2)); // 35 (string)
+console.log(+num6.toPrecision(2)); // 35 (number)
+console.log(Number(num6.toPrecision(2))); // 35 (number)
 
 // Math.random() generates random numbers from zero to one not including one
 console.log(Math.random());
@@ -77,17 +102,17 @@ console.log(Math.min(1, 5, 0, 6));
 
 // Math.abs()  convert negative numbers to positive
 
-console.log(Math.abs(-10)); // resalt 10
+console.log(Math.abs(-10)); // result 10
 
 // Math.pow(number, exponentiation)
-// Another way to exponentiate with operator **
+// Another way to exponential with operator **
 
-console.log(Math.pow(5, 2)); // resalt 25
-console.log(5 ** 2); // resalt 25
+console.log(Math.pow(5, 2)); // result 25
+console.log(5 ** 2); // result 25
 
 //Math.sqrt() takes the square root of a number
 
-console.log(Math.sqrt(64)); // resalt 8
+console.log(Math.sqrt(64)); // result 8
 
 // function isNaN() - determines if an element is a number  returns true or false
 
@@ -127,9 +152,9 @@ const html2 = '300%';
 const html3 = '240vh';
 
 console.log(parseInt(anyString)); // does not work. returns NaN
-console.log(parseInt(html1));
-console.log(parseInt(html2));
-console.log(parseInt(html3));
+console.log(parseInt(html1)); // 200
+console.log(parseInt(html2)); // 300
+console.log(parseInt(html3)); // 240
 
 
 // Method parseFloat() extracts numbers from a string with a fraction

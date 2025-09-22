@@ -175,7 +175,7 @@ function getSum(a, b) {
 }
 console.log(getSum(5, 10))
 
-// function returns deferent resalts
+// function returns deferent results
 
 function filter(a, b) {
   if (a < b) {
@@ -574,6 +574,28 @@ valButton.addEventListener('click', showVal2);
 valButton.addEventListener('click',showVal2);
 valButton.addEventListener('click',showVal3);
 
+// another example with bind
+const goods = {
+  title: 'phone',
+  price: 120,
+  count: 3,
+  calcPrice() {
+    console.log(this.count * this.price);
+    console.log( this);
+    
+  }
+}
+goods.calcPrice(); // calling calcPrice for its parent object
+
+const goods2 = {
+  title: 'phone',
+  price: 100,
+  count: 3,
+}
+
+const calculatePrice = goods.calcPrice.bind(goods2);
+ calculatePrice(); // calling calcPrice for another object
+
 
 // example with call()  apply()  bind()  // calling function calculate inside function detailing
 
@@ -620,15 +642,16 @@ function anim() {
 anim();
 
 // example with recursion moving an item
-const item = document.querySelector('.figura__item');
+const item = document.querySelector('.anim');
 let count = 0;
 function moveItem() {
   count = count + 10;
   setTimeout(() => {
-    item.style.left = count + 'px';
+    // item.style.left = count + 'px';
+    item.style.transform = `translateX(${count}px)`
     moveItem()
   }, 100);
-  if(count === 150) {
+  if(count === 250) {
     // return false;
     count = 0;
   }
@@ -692,9 +715,25 @@ function getParents(obj) {
     }
   }
 }
+
+// calling getParent function in a loop
 for(let key in parentTree) {
   getParents(parentTree[key])
 }
+
+ // Function to enumerate DOM elements recursively
+ function enumerateDOM(element, depth = 0) {
+  // Print the current element's tag name with indentation based on depth
+  console.log(`${' '.repeat(depth * 2)}${element.tagName}`);
+  
+  // Iterate over the child elements and call the function recursively
+  Array.from(element.children).forEach(child => {
+    enumerateDOM(child, depth + 1);
+  });
+}
+
+// Usage example: Enumerate all elements within the document body
+enumerateDOM(document.querySelector('body'));
 
 
 // closures
@@ -715,7 +754,7 @@ function wrapper() {
 }
 wrapper();
 
-// closures with anonimus function
+// closures with anonym function
 
 (function () {
 
@@ -731,7 +770,7 @@ wrapper();
 
 })();
 
-
+// closures with return
 function wrapper2() {
 
   let counter = 0;
@@ -746,6 +785,44 @@ let newWrapper = wrapper2();
 newWrapper();
 newWrapper();
 newWrapper();
+
+// example with changing balance
+
+function changeBalance() {
+  let balance = 0;
+  return function (sum) {
+    balance += sum;
+    console.log(`Balance is ${balance}`);
+  }
+}
+
+const newBalance = changeBalance();
+newBalance(100);
+newBalance(200);
+newBalance(-100);
+
+const newBalance2 = changeBalance();
+newBalance2(1000);
+newBalance2(200);
+newBalance2(-500);
+
+// closures with parameter
+
+function makeCounter(count) {
+  return function () {
+  return  count++;
+  }
+ }
+
+ const newCounter =  makeCounter(0)
+ console.log(newCounter()); // 0
+ console.log(newCounter()); // 1
+ console.log(newCounter()); // 2
+ 
+ const newCounter1 =  makeCounter(10);
+ console.log(newCounter1()); // 10
+ console.log(newCounter1()); // 11
+ console.log(newCounter1()); // 12
 
 
 // recursion in closures
@@ -767,6 +844,55 @@ callFunc();
 let callFunc2 = cl();
 callFunc2();
 
+// closures with object
+
+function createCounter() {
+  let count = 0;
+  return {
+    increment() {
+      count++;
+      return count;
+    },
+    decrement() {
+      count--;
+      return count;
+    }
+  };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // Outputs: 1
+console.log(counter.decrement()); // Outputs: 0
+
+// function multiplier with closures
+
+function createMultiplier(multiplier) {
+  return function(value) {
+    return value * multiplier;
+  };
+}
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+console.log(double(5)); // Outputs: 10
+console.log(triple(5)); // Outputs: 15
+
+// counter for button's clicks
+function addClickCounter(button) {
+  let count = 0;
+  button.addEventListener('click', function () {
+    count++;
+    console.log(`${this.textContent} clicked ${count} times`);
+  });
+}
+
+const button = document.querySelector('#btn-1');
+addClickCounter(button);
+
+const button2 = document.querySelector('#btn-2');
+addClickCounter(button2);
+
+
 // Destructuring function parameters
 
 // some object
@@ -776,7 +902,7 @@ const userData = {
   userCity: 'Kharkiv'
 }
 
-// function wich cretes new variables from object's properties
+// function witch creates new variables from object's properties
 const userInfo = ({userName, userCity}) => {
   return `${userName}, ${userCity}`;
 }
@@ -787,6 +913,6 @@ console.log(userInfo(userData)); // object as argument
 
 //  learn later...
 
-// asinc callback functions 
+// async callback functions 
 
 //  learn later...
