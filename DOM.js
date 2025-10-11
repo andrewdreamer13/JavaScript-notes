@@ -288,6 +288,8 @@ console.log(title.dataset.num); // 20
 
 // CREATING and adding DOM elements
 
+ const fragment = document.createDocumentFragment(); // unvisible wrapper for a lot of items
+
 // Method 'createElement' - creates new element in HTML document
 
 let circle = document.createElement("div"); //creating new element
@@ -638,12 +640,21 @@ console.log(metrics.getBoundingClientRect());
 console.log(metrics.getBoundingClientRect().left);
 console.log(metrics.getBoundingClientRect().top);
 
+
+// Method elem.scrollIntoView()
+const transBtn2 = document.querySelector('.form__button');
+transBtn1.addEventListener('click', () => {
+  document.querySelector('.form').scrollIntoView({
+    behavior: 'smooth',
+    block: 'end' // inline: 'top, center, nearest'
+  })
+})
+
 // Method elem.scrollIntoView(true) - translates the pointed element to the top of the window
 
 const transBtn = document.querySelector(".translate-btn-top");
 
 transBtn.onclick = () => {
-  transBtn.style.backgroundColor = "red";
   document.querySelector(".translate").scrollIntoView(true);
 };
 

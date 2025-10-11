@@ -28,6 +28,8 @@
 // forEach()         string 701
 // spread            string 719
 // this              string 785
+// Map()
+// Set()
 
 // SIMPLE ARRAYS
 
@@ -47,7 +49,7 @@ console.log(numbers.length); // 9
 console.log(numbers[2]); // 30
 console.log(numbers[0]); // 10
 console.log(numbers[8]);// 90
-console.log(numbers[numbers.length - 1]); // 90 lest item by index
+console.log(numbers[numbers.length - 1]); // 90 last item by index
 
 // with method at()
 console.log(numbers.at(8)); // 90
@@ -593,6 +595,33 @@ let uniqueArray = arrayWithDuplicates.reduce((accumulator, currentValue) => {
 }, []);
 console.log(uniqueArray); // Outputs: [1, 2, 3, 4, 5, 6, 7]
 
+// middle age from objects in array with reduce
+
+const users = [
+  {userName: 'Andrew', userAge:48, userGender: 'male'},
+  {userName: 'Antony', userAge:38, userGender: 'male'},
+  {userName: 'Anastasia', userAge:32, userGender: 'female'},
+  {userName: 'Polina', userAge:4, userGender: 'female'},
+];
+
+const middleAge = users.reduceRight((accum, user) => {
+  console.log(user.userAge);
+ return accum + user.userAge / users.length
+  
+},0)
+
+console.log(middleAge);
+
+// reduceRight
+
+const ageFromRight = users.reduceRight((accum, user) => {
+  console.log(user.userAge);
+ return accum + user.userAge
+  
+},0)
+
+console.log(ageFromRight);
+
 
 // EVERY  every() check an array and return true or false. return true if all the items are true
 
@@ -1121,3 +1150,13 @@ console.log(array1); //  ['eat', 'sleep', 'code']
 console.log(array2); //  ['run', 'swim', Array]
 console.log(array2[0]); // 'run'
 console.log(array2[2][1]); // 'swim'
+
+
+// Set colection
+
+// get unic number with set
+
+const repeatNumArr = [12, 3, 8, 12, 10, 8, 45];
+
+const unicNumArr = Array.from(new Set(repeatNumArr));
+console.log(unicNumArr);

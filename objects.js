@@ -627,6 +627,31 @@ console.log(weekFromEntr);
 const food =  Object.fromEntries([['plum','blue'], ['apple','red'], ['cherry','red']]);
 console.log(food);
 
+// object formating with Object.entries and Object.fromEntries
+
+const userInfo2 = {
+  name: 'Andrew',
+  age: 48,
+  hobbies: ['coding', 'hardware', 'rain'],
+  canRun () {console.log(`${this.name} can run`)}
+};
+
+console.log(userInfo2); // {name: 'Andrew', age: 48, hobbies: Array(3), canRun: ƒ}
+
+const keyValArr = Object.entries(userInfo2);
+console.log(keyValArr);
+
+ const formatedArr = keyValArr.map(([key, value]) => {
+  return [key.toUpperCase(), value];
+});
+
+console.log(formatedArr);
+
+const formatedObj = Object.fromEntries(formatedArr)
+console.log(formatedObj); // {NAME: 'Andrew', AGE: 48, HOBBIES: Array(3), CANRUN: ƒ}
+
+
+
 // Method freeze() freezes an object an object cannot be changed
 
 const unChanged = {

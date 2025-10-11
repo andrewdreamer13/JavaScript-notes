@@ -1,3 +1,130 @@
+
+// Основы ООП 
+// - Класс — это чертёж, архитектурный план. Он описывает, какие свойства и поведение будут у объектов.
+// - Объект — это экземпляр класса, как построенное здание по чертежу.
+// - Инкапсуляция — скрытие внутренней логики. Как инженерный модуль с интерфейсом, но без доступа к внутренним проводам.
+// - Наследование — повторное использование архитектуры. Новый класс наследует свойства и методы базового, как расширение здания.
+// - Полиморфизм — единый интерфейс, разные реализации. Как розетка, в которую можно вставить разные приборы — поведение зависит от того, что подключено.
+// - Абстракция — выделение сути, без деталей. Как схема метро: показывает маршруты, но не рассказывает, как устроены поезда.
+
+
+// СОЗДАНИЕ КЛАССА
+
+class User {
+  // Свойства класса по умолчанию(в дальнейшем могут меняться в созданых обьектах)
+  planet = 'Earth';
+  country = 'Ukraine';
+
+  // Приватное свойство пишется с решёткой # Видно только внутри класса
+  #city = null;
+  
+  // Статическое свойство Вызывается только при обращении к классу
+  static programer = 'Andrew Dreamer';
+
+
+  // Конструктор внутри класса используется для динамических свойств, которые приходят снаружи
+  constructor(name, age, email) {
+    this.name = name,
+    this.age = age,
+    this.email = email,
+    this.#doSomething ();
+
+  }
+
+  // Методы в классах
+  logUserName () {
+    console.log(this.name);
+  }
+
+  // Метод set(setter)- приватный метод с наружи его не вызвать
+  set city (value) {
+
+    const firstLetter = value[0].toUpperCase();
+    const fromSecondLetter = value.slice(1).toLowerCase();
+
+    this.#city = `${firstLetter}${fromSecondLetter}`;
+  }
+
+
+  // Метод get(getter) - приватный метод с наружи его нельзя вызвать
+  get city () {
+    return this.#city;
+  }
+
+  // Приватный метод создаётся с решеткой в названии. Вызывается только в теле конструктора
+  #doSomething () {
+    console.log('hello');
+  }
+
+  // Статический метод. Вызывается только при обращении к классу. Не может внутри использовать this
+  static stopTheWar () {
+    const peace = 'Peace'
+    console.log(peace);
+    return peace;
+  }
+
+}
+
+// Создание обьекта который наследуется от класса
+
+const user1 = new User('Andrew', 48, 'exam@gmail.com');
+console.log(user1); // {planet: 'Earth', country: 'Ukraine', name: 'Andrew', age: 48, email: 'exam@gmail.com'}
+
+// замена значения свойства country
+user1.country = 'Poland';
+console.log(user1); // {planet: 'Earth', country: 'Poland', name: 'Andrew', age: 48, email: 'exam@gmail.com'}
+
+// Вызов метода класса через созданый обьект
+
+user1.logUserName(); // Andrew
+
+// Вызов свойства
+console.log(user1.email); // exam@gmail.com
+
+// Добавление свойства в обьект(под капотом работают set и get)
+user1.city = 'varshava'; //  отработка сеттера
+console.log(user1.city); // отработка геттера
+
+// Вызов статического свойства через обращение непосредственно к классу. Через екземпляр не вызывается
+console.log(User.programer);
+
+// Вызов статического метода через обращение непосредственно к классу. Через екземпляр не вызывается
+console.log(User.stopTheWar());
+
+// НАСЛЕДОВАНИЕ КЛАССОВ
+
+class Student extends User {
+
+ // В параметры конструктора записываются и свои и наследуемые свойства. Наследуемые свойства прогоняются через конструкцию super()
+  constructor (name, age, email, univer, faculty) {
+    super(name, age, email);
+    this.univer = univer;
+    this.faculty = faculty;
+  }
+
+  // Наследование и расширение наследуемых методов с помощью конструкции super
+  logUserName () {
+    super.logUserName();
+    console.log(this.faculty);
+  }
+}
+
+const student1 = new Student ('Matew', 18, 'exam@gmail.com', 'harvard', 'Frontend');
+console.log(student1.name);
+console.log(student1.faculty);
+
+// метод из класса User
+student1.logUserName();
+
+
+// Новый класс наследует так же внутрение методы и свойства
+console.log(Student.stopTheWar()); // Peace
+console.log(Student.programer); // Andrew Dreamer
+
+
+
+
+
 // Creating a class
 // class - a function for creating objects
 // typeof class - function

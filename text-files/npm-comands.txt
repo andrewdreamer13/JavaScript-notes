@@ -1,0 +1,19 @@
+| Команда | Описание | 
+| npm init | Инициализация нового проекта. Создаёт package.json. | 
+| npm install | Устанавливает зависимости из package.json. | 
+| npm install 'package' | Устанавливает указанный пакет локально. | 
+| npm install -g 'package' | Устанавливает пакет глобально. | 
+| npm install 'package'@'version' | Установка конкретной версии пакета. | 
+| npm uninstall 'package' | Удаляет пакет из проекта. | 
+| npm update | Обновляет все зависимости до последних совместимых версий. | 
+| npm outdated | Показывает устаревшие пакеты. | 
+| npm run script | Запускает скрипт из package.json. | 
+| npm list | Показывает дерево установленных пакетов. | 
+| npm list -g --depth=0 | Список глобально установленных пакетов. | 
+| npm cache clean --force | Очистка кэша npm. | 
+| npm audit | Проверка на уязвимости в зависимостях. | 
+| npm audit fix | Автоматическое исправление найденных уязвимостей. | 
+| npm version 'type' | Увеличивает версию (patch, minor, major). | 
+| npm publish | Публикует пакет в npm-репозиторий. | 
+| npm login | Авторизация в npm. | 
+| npm config set 'key' 'value' | Установка конфигурации npm. | 

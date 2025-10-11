@@ -1,0 +1,310 @@
+Git Configuration
+git config --global user.name "Your Name"       # Set global username
+git config --global user.email "your_email@..." # Set global email
+git config --list                               # View all Git settings
+git config user.name                            # View local username
+git config user.email                           # View local email
+git config --get core.editor                    # Check which editor Git uses
+git --version                                   # Show Git version
+git --help                                      # Display help for Git commands
+
+
+
+📂 Repository Setup & Info
+git init                                        # Initialize a new Git repository
+git clone <URL>                                 # Clone a remote repository
+git status                                      # Show current status of files
+git status --short                              # Show current status of files(short version)
+git ls-files                                    # List tracked files
+git log                                         # Show commit history
+git log --pretty=oneline                        # Show commits in one line each
+git log -p                                      # Show changes introduced by each commit
+git diff                                        # Show differences between versions
+
+📜 Git Log (Graph View)
+git log --graph                                      # Show commit history as ASCII tree  
+git log --graph --oneline                            # Compact tree view with short hashes and messages  
+git log --graph --oneline --all                      # Include all branches in the graph  
+git log --graph --oneline --all --decorate           # Show branch and tag names alongside commits  
+git log --graph --oneline --all --decorate --color   # Add color for readability  
+git log --graph --oneline --all --decorate --date=short --pretty=format:"%h %ad %d %s (%an)"  
+                                                     # Custom format: hash, date, refs, message, author  
+
+
+📌 Staging & Committing
+git add .                                       # Stage all changes
+git restore --staged <file>                     # Unstage a file
+git reset HEAD                                  # Unstage all changes(all files)
+git commit -m "message"                         # Commit with a message
+git commit -am "message"                        # Stage and commit in one step
+git commit --amend -m "new message"             # Edit last commit message
+git reset --hard HEAD^                          # Remove last commit
+git reset --hard HEAD~2                         # Remove last two commits
+git reflog                                      # Show full history including deleted commits
+
+
+📌 Git Stash
+git stash push -m "comment"                     # Сохранить изменения и очистить рабочую папку  
+git stash push --include-untracked -m "всё"     # Сохранить всё, включая неотслеживаемые файлы  
+git stash list                                  # Посмотреть список сохранённых стэшей  
+git stash show -p                               # Посмотреть diff последнего стэша  
+git stash apply stash@{0}                       # Применить stash, но оставить его в списке  
+git stash pop                                   # Применить и удалить stash  
+git stash drop stash@{1}                        # Удалить конкретный stash  
+git stash clear                                 # Удалить все stash'и
+
+
+🌿 Branching & Switching
+git branch <name>                               # Create a new branch
+git branch -m <new name>                        # Rename current branch
+git branch -d <name>                            # Delete branch. Does not allow deleting an unmerged branch.
+git branch -D <name>                            # Delete a branch. Deletes anyway
+git branch -a                                   # List all branches (local + remote)
+git branch -vv                                  # Show local branches and their upstream links
+
+git checkout <branch>                           # Switch to branch (old syntax)
+git checkout -b <branch>                        # Create and switch to new branch
+git switch <branch>                             # Switch to branch (modern syntax)
+git switch -c <branch>                          # Create and switch to new branch
+
+git checkout <commit>                           # Go to specific commit
+git switch --detach <commit>                    # Detach HEAD and view commit
+git checkout -b debug-branch <hash>             # Create branch from specific commit
+git switch --create debug-branch <hash>         # Same as above, modern syntax
+
+
+
+🔀 Git Merge
+git merge <branch-name>           # Merge specified branch into current branch with merge commit
+git merge --ff-only <branch>      # No commit, just moves the pointer.Works only if the current branch is an parent of the merged branch.
+git merge --no-ff <branch-name>   # Always creates a merge commit, even if fast-forward is possible
+git merge --squash <branch-name>  # Combine changes into one commit (no branch history)
+git merge --abort                 # Cancel merge if conflicts arise
+example with merge:
+  git checkout main
+  git merge --no-ff feature-branch -m "Merge feature: layout refactor"
+
+🔄 Git Rebase
+git rebase <branch-name>                        # Reapply commits from current branch onto target
+git rebase -i HEAD~N                            # Interactive rebase of last N commits
+git rebase --continue                           # Resume rebase after resolving conflicts
+git rebase --abort                              # Cancel rebase process
+
+🔄 Remote Repositories
+git remote add origin <URL>                     # Add remote repository
+git remote -v                                   # Show remote URLs
+git remote                                      # List remote names
+git pull origin main                            # Fetch and merge changes from remote
+git push                                        # Push changes to remote
+git push -u origin main                         # First push to remote main branch
+git push --set-upstream origin <branch>         # First push of a new branch
+
+
+
+🧹 Reset & Recovery
+git reset HEAD                                  # Unstage changes
+git reset --hard HEAD^                          # Remove last commit
+git reflog                                      # Recover deleted commits
+git checkout <hash>                             # Restore state from a specific commit
+
+
+
+🧪 Advanced Git
+git cat-file -t <hash>                          # Show object type
+git cat-file -p <hash>                          # Show object content
+
+
+
+📁 Terminal File Management
+cd <folder>                                     # Enter folder
+cd ..                                           # Go up one level
+mkdir <folder>                                  # Create folder
+pwd                                             # Show where you are
+touch                                           # Create a file
+cp file folder                                  # Copy a file
+cp -r folder                                    # Copy a folder
+mv <file/folder>                                # Move file or folder
+rm <file>                                       # Delete file
+rm -r <folder>                                  # Delete folder
+echo <text> > <file>                            # Write text to file
+ls                                              # List files and folders
+ls > <file name>                                # Create a file
+ls -la                                          # List all, including hidden
+
+
+
+🌐 GitHub & Pull Requests
+- origin — default name for remote repository
+- Pull Request — merge branches via GitHub’s Contribute tab
+
+///////////////////////////////
+
+🔧 Git Configuration
+# ⚙️ Установить глобальные данные пользователя
+git config --global user.name "Your Name"       # Имя для всех репозиториев
+git config --global user.email "your_email@..." # Email для всех репозиториев
+
+# 🔍 Проверить настройки
+git config --list                               # Показать все настройки Git
+git config user.name                            # Имя для текущего репозитория
+git config user.email                           # Email для текущего репозитория
+git config --get core.editor                    # Узнать, какой редактор используется
+
+# 📦 Версия и справка
+git --version                                   # Показать версию Git
+git --help                                      # Справка по командам
+
+
+
+📂 Repository Setup & Info
+# 🆕 Создать или склонировать репозиторий
+git init                                        # Инициализировать новый репозиторий
+git clone <URL>                                 # Клонировать удалённый репозиторий
+
+# 📋 Проверить состояние и историю
+git status                                      # Показать текущие изменения
+git ls-files                                    # Список отслеживаемых файлов
+git log                                         # История коммитов
+git log --pretty=oneline                        # Коммиты в одну строку
+git log -p                                      # Показать изменения в каждом коммите
+git show <hash>                                 # Детали конкретного коммита
+git diff                                        # Разница между рабочими файлами и индексом
+git diff --cached                               # Разница между staged и последним коммитом
+
+
+
+🌳 Git Log (Graph View)
+# 🌿 Визуализировать историю
+git log --graph                                 # ASCII-дерево коммитов
+git log --graph --oneline                       # Краткий граф с хешами и сообщениями
+git log --graph --oneline --all --decorate      # Ветки, теги и коммиты
+git log --graph --oneline --all --decorate --color   # Цветной граф
+git log --graph --oneline --all --decorate --date=short --pretty=format:"%h %ad %d %s (%an)"   # Кастомный формат
+
+🧠 git reflog — инженерная память Git
+# 📋 Посмотреть все перемещения HEAD
+git reflog
+# Показывает историю всех действий: коммиты, reset, checkout, rebase, amend и т.д.
+
+
+
+🔍 Навигация по reflog
+# 🔄 Вернуться к предыдущему состоянию
+git reset --hard HEAD@{1}
+# Откат к позиции HEAD один шаг назад
+
+# 🕰 Перейти к конкретному коммиту из reflog
+git checkout <hash>
+# Переместиться в detached HEAD на указанный коммит
+
+# 🧪 Создать ветку из старого состояния
+git checkout -b restore-branch HEAD@{3}
+# Сохраняет старое состояние как новую ветку
+
+# 🔍 Найти коммиты по действию
+git reflog | grep commit
+git reflog | grep reset
+# Фильтрует reflog по ключевым словам
+
+
+
+📌 Staging & Committing
+# ✅ Добавить изменения
+git add .                                       # Добавить все файлы в индекс
+
+# ❗ Отменить случайный git add
+git restore --staged <file>                     # Убрать файл из staged, оставить правки
+
+# 🔄 Откатить файл к последнему коммиту
+git restore <file>                              # Вернуть файл к версии из HEAD
+
+# 🕰 Восстановить файл из прошлого
+git restore --source <commit> <file>    
+
+
+# 🧳 Сохранить текущие изменения
+git stash                         # Сохраняет рабочие файлы и staged
+
+# 📋 Посмотреть список сохранений
+git stash list                    # Показывает все stash'и
+
+# 🔄 Вернуть последнее сохранение
+git stash apply                   # Применяет последний stash
+
+# ❌ Удалить stash
+git stash drop                    # Удаляет сохранённое состояние
+
+////////////////////////
+
+git config --global user.name "Your Name" - set user name
+   git config --global user.email "your_email@whatever.com" - set user email
+   git config --list - check git information
+   git config user.name - check user name in git repository
+   git config user.email - check user email in git repository
+   git --help - info with git comands
+    
+   git --version  - checking git version
+   git init - start git
+   git status - shows status of project in git repository 
+   git add . - adds folders to the staging area
+   git restore --staged <file>... -  to unstage a staged file
+   git reset HEAD - command to unstage changes.write after git add 
+   git reset --hard HEAD^ - removes the last commits
+   git reset --hard HEAD~2 - removes the last two commits.
+   git reflog - shows all commits(shows commit's hashes) even deleted commits.then git checkout< hash> .git branch <new branch>< hash>.on main mergering with new branch
+
+   git commit -m "comment"-  adds folders to the repository with some comments
+   git commit -am "comment" - one comannd instad of two -( git add .) ( git commit -m "comment")
+   git commit --amend -m "new text" - changing text in commit
+   git log - shows all the commits in the project with its full information 
+   git log --pretty=oneline - shows all the commits in the project with its full information every commit in one line
+   git log -p  - shows what was changed
+   git diff  - shows what was changed
+   git checkout <commit hash> - goes to the one of version in the project - old version
+   git switch --detach <commit hash> - - goes to the one of version in the project - new version
+   git checkout <main> - goes back to the last commit in the project 
+   git switch main - goes back to the last commit in the project
+   git switch < branch name> - goes to the one of version in the project
+   git checkout -b debug-branch 7a3f9c2  - move to this commit and from there immediately create a new branch
+   git switch --create debug-branch 7a3f9c2 - move to this commit and from there immediately create a new branch
+
+
+   git branch <branch name> - creates new branch 
+   git checkout <branch name> - goes to the one of branches in the project (main, master...) - old version 
+   git checkout -b <branch name> - creating a new branch and moving to it 
+   git switch < branch name> - goes to the one of branches in the project (main, master...) - new version
+   git switch -c <branch name> - Create and immediately switch to a new branch
+
+   git branch - shows branch list  
+   git branch -m <new branch name> - renaming the current branch 
+   git branch -d <branch name> - deleting a branch (except the current branch) 
+   git merge <branch name> - branch merging with the current branch 
+   git merge -m "message" <branch name> - branch merging with the current branch and with a comment 
+   git branch -a - to see all the branches on the remote repository 
+
+   cd <folder name> - goes to the pointed folder in the project 
+   cd .. returns to the root folder in the project 
+   git cat-file -t <hash> - shoes type of the git object 
+   git cat-file -p <hash> - shoes content(folders and files) of the git object 
+   rm <name of folder or file> - removes folders and files from project 
+   mkdir <name of folder> - creates new folder in the project  
+   echo <text> > <name of file> - creates content in the pointed file 
+   ls - shows all folders and files in the project
+   ls -la  - shows all folders and files in the project with hidden folders and files
+   git ls-files - shows all folders and files in the project
+
+   origin - a remote repository name (https://github.com/andrewdreamer13/test)
+   git clone <URL> - cloning a remote repository to my computer 
+   git branch -a - to see all the branches on the remote repository 
+   git pull origin main - download changes from the remote branch in gitHub to the local branch 
+   git push - upload changes from the local branch to the remote branch 
+   git remote add origin <URL> - adding a remote repository on gitHub 
+   git push -u origin main - uploading changes from a local branch to a remote branch(for the first pushing on githab.Then use git push)
+   git push --set-upstream origin <branch name> - uploading changes from a local new branch to a remote branch(for the first pushing on githab.Then use git push)
+   git remote -v - shows address of the remote repository -->
+   git branch -vv - shows conection local branch with remote branch 
+   git remote - checking if remote repository exists(if exists,shows its name) 
+   pull request -  branch merging in gitHub by Contribute tab
+
+
+   

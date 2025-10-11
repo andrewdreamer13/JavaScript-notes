@@ -341,6 +341,9 @@ const story = 'Ever say ever';
 const story1 = story.replace(/ever/gi, 'never');
 console.log(story1);
 
+const phoneNumber = '+38 (999) 999-99-99';
+console.log(phoneNumber.replace(/\d/g, '0'));
+
 // replace char with override by variable
 
 let anyText = 'Hello, world';

@@ -339,6 +339,10 @@ wrappSendFormData();
 // fulfilled - successfull answer
 // rejected - answer with mistake
 
+// cache: "no-cache" → браузер проверяет у сервера, изменились ли данные (если нет — вернёт из кэша).
+// cache: "reload" → всегда берёт с сервера, но обновляет кэш.
+// cache: "force-cache" → наоборот, максимально использует кэш.
+
 const newPromise = new Promise((resolve, reject) => {
   fetch('http://localhost:3000/users/1239')
     .then((responseData) => { // responseData contains answer from server
@@ -467,6 +471,11 @@ getBeer.then((beerList) => {
 
 
 // Fetch
+
+// cache: "no-cache" → браузер проверяет у сервера, изменились ли данные (если нет — вернёт из кэша).
+// cache: "reload" → всегда берёт с сервера, но обновляет кэш.
+// cache: "force-cache" → наоборот, максимально использует кэш.
+
 
 fetch('http://localhost:3000/users')
   .then((response) => { // response contains the answer from server
